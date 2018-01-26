@@ -48,6 +48,7 @@ public class RoomGenerator
         
         // generate walls
         new WallGenerator(m_gridSystem);
+        new DoorGenerator(m_gridSystem);
     }
 
     List<RoomTransform> GetTransformations(RoomTransform transform, int roomSize)
