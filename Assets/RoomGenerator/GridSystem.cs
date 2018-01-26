@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using UnityEngine;
 
 public enum TileType { NULL = -1, empty = 0, floor, wall}
 
@@ -83,5 +85,42 @@ public class GridSystem : GameSystem
     public override void Clear()
     {
         //
+    }
+
+    static bool IntersectsElement(Vector2 origin, Vector2 dir, IntVector2 tile)
+    {
+        Vector2 bMin = new Vector2(tile.X - .5f, tile.Y - .5f);
+        Vector2 bMax = new Vector2(tile.X + .5f, tile.Y + .5f);
+
+        float tMin = (bMin.x - origin.x) / dir.x;
+        float tmax = (bMax.x - origin.x) / dir.x;
+
+        if (tMin > tmax)
+        {
+            float t = tMin;
+            tMin = tmax;
+            tmax = t;
+        }
+
+        float tyMin = (bMin.y - origin.y) / dir.y;
+        float tyMax = (bMax.y - origin.y) / dir.y;
+
+        if (tyMin > tyMax)
+        {
+            float t = tyMin;
+            tyMin = tyMax;
+            tyMax = t;
+        }
+
+        if ((tMin > tyMax) || (tyMin > tmax))
+            return false;
+
+        if (tyMin > tMin)
+            tMin = tyMin;
+
+        if (tyMax < tmax)
+            tmax = tyMax;
+
+        return true;
     }
 }
