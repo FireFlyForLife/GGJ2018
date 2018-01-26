@@ -7,13 +7,13 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-[Serializable]
-public class SpriteHolder
-{
-    public double x;
-    public double y;
-    public int texture;
-}
+//[Serializable]
+//public class SpriteHolder
+//{
+//    public double x;
+//    public double y;
+//    public int texture;
+//}
 
 public class RaycastRenderer : MonoBehaviour
 {
@@ -23,8 +23,8 @@ public class RaycastRenderer : MonoBehaviour
     public int texWidth = 64;
     public int texHeight = 64;
 
-    public Sprite[] SpriteRegistery;
-    public List<SpriteHolder> Sprites;
+    
+    //public List<SpriteHolder> Sprites;
 
     public RawImage ImageComponent;
 
@@ -38,9 +38,9 @@ public class RaycastRenderer : MonoBehaviour
     private int[] spriteOrder;
     private double[] spriteDistance;
 
-    public double posX = 22, posY = 12;  //x and y start position
-    public double dirX = -1, dirY = 0; //initial direction vector
-    public double planeX = 0, planeY = 0.66; //the 2d raycaster version of camera plane
+    public float posX = 22, posY = 12;  //x and y start position
+    public float dirX = -1, dirY = 0; //initial direction vector
+    public float planeX = 0, planeY = 0.66f; //the 2d raycaster version of camera plane
 
 
     public RectTransform Rect { get { return (RectTransform) transform; } }
@@ -53,8 +53,8 @@ public class RaycastRenderer : MonoBehaviour
 
 	    ZBuffer = new double[Width];
 
-	    spriteOrder = new int[Sprites.Count];
-	    spriteDistance = new double[Sprites.Count];
+	    spriteOrder = new int[100];
+	    spriteDistance = new double[100];
 
         blankScreen = new Color32[Width*Height];
 	    for (int i = 0; i < blankScreen.Length; i++)
@@ -81,6 +81,13 @@ public class RaycastRenderer : MonoBehaviour
 
     void RenderImage()
     {
+        if(posX < 0 || posY < 0)
+            Debug.Log(posX + " : " + posY);
+        if (World.worldMap[(int)posX, (int)posY] != 0)
+            throw new Exception("Starting in a wall!!!!");
+
+        var Sprites = World.Entities;
+
         for (int x = 0; x < Width; x++)
         {
             //calculate ray position and direction
@@ -188,7 +195,7 @@ public class RaycastRenderer : MonoBehaviour
         for (int i = 0; i < Sprites.Count; i++)
         {
             spriteOrder[i] = i;
-            spriteDistance[i] = ((posX - Sprites[i].x) * (posX - Sprites[i].x) + (posY - Sprites[i].y) * (posY - Sprites[i].y)); //sqrt not taken, unneeded
+            spriteDistance[i] = ((posX - Sprites[i].X) * (posX - Sprites[i].X) + (posY - Sprites[i].Y) * (posY - Sprites[i].Y)); //sqrt not taken, unneeded
         }
 
         comboSort(spriteOrder, spriteDistance, Sprites.Count);
@@ -197,15 +204,21 @@ public class RaycastRenderer : MonoBehaviour
         for (int i = 0; i < Sprites.Count; i++)
         {
             //translate sprite position to relative to camera
-            double spriteX = Sprites[spriteOrder[i]].x - posX;
-            double spriteY = Sprites[spriteOrder[i]].y - posY;
+            double spriteX = Sprites[spriteOrder[i]].X - posX;
+            double spriteY = Sprites[spriteOrder[i]].Y - posY;
+
+            if(Math.Abs(spriteX) < 0.0001 && Math.Abs(spriteY) < 0.0001) //We are standing right ontop of the sprite
+                continue;
 
             //transform sprite with the inverse camera matrix
             // [ planeX   dirX ] -1                                       [ dirY      -dirX ]
             // [               ]       =  1/(planeX*dirY-dirX*planeY) *   [                 ]
             // [ planeY   dirY ]                                          [ -planeY  planeX ]
 
-            double invDet = 1.0 / (planeX * dirY - dirX * planeY); //required for correct matrix multiplication
+            //I think this is the determinant?
+            double determinant = (planeX * dirY - dirX * planeY);
+
+            double invDet = 1.0 / determinant; //required for correct matrix multiplication
 
             double transformX = invDet * (dirY * spriteX - dirX * spriteY);
             double transformY = invDet * (-planeY * spriteX + planeX * spriteY); //this is actually the depth inside the screen, that what Z is in 3D
@@ -220,7 +233,18 @@ public class RaycastRenderer : MonoBehaviour
             int vMoveScreen = (int)(vMove / transformY);
 
             //calculate height of the sprite on screen
-            int spriteHeight = Math.Abs((int) (Height / (transformY)) ) / vDiv; //using "transformY" instead of the real distance prevents fisheye
+            int spriteHeight = -1;
+            try
+            {
+                spriteHeight =
+                    Math.Abs((int) (Height / (transformY))) /
+                    vDiv; //using "transformY" instead of the real distance prevents fisheye
+            }
+            catch (Exception ex)
+            {
+                Debug.Log("errror" + ex);
+            }
+
             //calculate lowest and highest pixel to fill in current stripe
             int drawStartY = -spriteHeight / 2 + Height / 2 + vMoveScreen;
             if (drawStartY < 0) drawStartY = 0;
@@ -250,7 +274,7 @@ public class RaycastRenderer : MonoBehaviour
                         int texY = ((d * texHeight) / spriteHeight) / 256;
                         // texWidth * texY + texX]; //get current color from the texture
                         
-                        Color color = SpriteRegistery[Sprites[spriteOrder[i]].texture].texture.GetPixel(texX, texY);
+                        Color color = RaycastResources.Instance.SpriteRegistery[Sprites[spriteOrder[i]].TextureId].texture.GetPixel(texX, texY);
 
                         //if ((color & 0x00FFFFFF) != 0) buffer[y, stripe] = color; //paint pixel if it isn't black, black is the invisible color
                         if(Math.Abs(color.a - 1) < 0.1f)

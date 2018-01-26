@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class World2D : MonoBehaviour {
-
+public class World2D : MonoBehaviour
+{
+    public List<RaycastEntity> Entities;
     #region WorldMap
     public int MapWidth { get { return worldMap.GetLength(0); } }
     public int MapHeight { get { return worldMap.GetLength(1); } }
