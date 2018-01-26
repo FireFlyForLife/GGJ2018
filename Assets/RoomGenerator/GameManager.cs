@@ -9,23 +9,26 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        m_gameSystems = new Dictionary<Type, GameSystem>();
-        m_updatableSystems = new List<GameSystem>();
+        //m_gameSystems = new Dictionary<Type, GameSystem>();
+        //m_updatableSystems = new List<GameSystem>();
 
-        Add<GridSystem>();
+        //Add<GridSystem>();
 
         // generate the rooms
         RoomGenerator generator = new RoomGenerator();
-        generator.Initialize(this, new IntVector2(0, 0));
+        generator.GetGridSystem.SetGridSize(new IntVector2(100,100));
         generator.GenerateRooms();
+
+        int[][] grid = generator.GetGridSystem.GetGrid;
+        TileType type = generator.GetGridSystem.GetTile(0, 1);
     }
 
     void Update()
     {
-        for (int i = 0; i < m_updatableSystems.Count; i++)
-        {
-            m_updatableSystems[i].Update();
-        }
+        //for (int i = 0; i < m_updatableSystems.Count; i++)
+        //{
+        //    m_updatableSystems[i].Update();
+        //}
     }
 
     public T Get<T>() where T : GameSystem

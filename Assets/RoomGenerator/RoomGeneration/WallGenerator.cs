@@ -10,7 +10,8 @@ public class WallGenerator
     public WallGenerator(GridSystem gridSystem)
     {
         m_gridSystem = gridSystem;
-        m_wallObject = Resources.Load<GameObject>("BlackQuad");
+        //m_wallObject = Resources.Load<GameObject>("BlackQuad");
+        PlaceWalls();
     }
 
 
@@ -50,8 +51,8 @@ public class WallGenerator
     private void OccupyWall(int x, int y)
     {
         m_gridSystem.SetOccupied(x, y, TileType.wall);
-        GameObject tile = GameObject.Instantiate(m_wallObject);
-        tile.transform.position = new Vector2(x, y);
+        //GameObject tile = GameObject.Instantiate(m_wallObject);
+        //tile.transform.position = new Vector2(x, y);
     }
 
     private bool IsEdgePosition(int x, int y)

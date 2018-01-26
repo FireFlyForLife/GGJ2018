@@ -12,19 +12,20 @@ public enum Direction
 
 public class RoomGenerator
 {
-    private GameManager m_gameManager;
-    private GameObject m_prefab;
     private bool m_generating;
+
 
     private Dictionary<Direction, IntVector2> m_directions = new Dictionary<Direction, IntVector2>();
     private Stack<RoomTransform> m_availablePositions;
+    private GridSystem m_gridSystem;
+
+    public GridSystem GetGridSystem { get { return m_gridSystem; } }
 
     RoomTransform m_transform;
 
-    public void Initialize(GameManager gSystem, IntVector2 position)
+    public RoomGenerator()
     {
-        m_gameManager = gSystem;
-
+        m_gridSystem = new GridSystem();
         m_directions.Add(Direction.up, new IntVector2(0, 1));
         m_directions.Add(Direction.down, new IntVector2(0, -1));
         m_directions.Add(Direction.left, new IntVector2(-1, 0));
@@ -32,7 +33,6 @@ public class RoomGenerator
 
         m_availablePositions = new Stack<RoomTransform>();
         m_transform = new RoomTransform(new IntVector2(5, 5), Direction.none, 0);
-        m_prefab = Resources.Load<GameObject>("FloorQuad");
     }
 
     public void GenerateRooms()
@@ -45,6 +45,9 @@ public class RoomGenerator
             // update the current transform to the new room's center after placing it
             m_transform = SetTiles(m_transform, roomSize);
         }
+        
+        // generate walls
+        new WallGenerator(m_gridSystem);
     }
 
     List<RoomTransform> GetTransformations(RoomTransform transform, int roomSize)
@@ -88,7 +91,7 @@ public class RoomGenerator
     bool IsPositionValid(RoomTransform transform, int roomSize)
     {
         List<IntVector2> positions = GetTiles(transform.centerPosition, roomSize);
-        return m_gameManager.Get<GridSystem>().IsAvailable(positions);
+        return m_gridSystem.IsAvailable(positions);
     }
 
     private List<IntVector2> GetTiles(IntVector2 pos, int roomSize)
@@ -159,9 +162,9 @@ public class RoomGenerator
     {
         for (int i = 0; i < positions.Count; i++)
         {
-            UnityEngine.GameObject tile = UnityEngine.GameObject.CreatePrimitive(UnityEngine.PrimitiveType.Quad);
-            tile.transform.position = new UnityEngine.Vector2(positions[i].X, positions[i].Y);
-            m_gameManager.Get<GridSystem>().SetOccupied(positions[i].X, positions[i].Y, TileType.floor);
+            //UnityEngine.GameObject tile = UnityEngine.GameObject.CreatePrimitive(UnityEngine.PrimitiveType.Quad);
+            //tile.transform.position = new UnityEngine.Vector2(positions[i].X, positions[i].Y);
+            m_gridSystem.SetOccupied(positions[i].X, positions[i].Y, TileType.floor);
         }
     }
 
@@ -182,7 +185,7 @@ public class RoomGenerator
     public void Clear()
     {
         m_generating = false;
-        new WallGenerator(m_gameManager.Get<GridSystem>()).PlaceWalls();
+        //new WallGenerator(m_gameManager.Get<GridSystem>()).PlaceWalls();
     }
 }
 
