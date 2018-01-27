@@ -29,59 +29,89 @@ public class SpawnPointGenerator {
         }
     }
 
-	public bool SpawnPlayer(GridSystem gridSystem)
+    public bool SpawnPlayer(GridSystem gridSystem)
     {
-        if (m_playerList.Count < 1)
+        if (m_playerList.Count < 1 || m_playerList.Count > 2)
         {
             Vector2 pos;
             //bool checkPlayers = false;
+            m_randomSpawnPoints = GetEmptyTiles(gridSystem);
+            int index = UnityEngine.Random.Range(0, m_randomSpawnPoints.Count - 1);
+            Vector2 newPosition = m_randomSpawnPoints[index];
 
-            Vector2 newPosition = m_randomSpawnPoints[UnityEngine.Random.Range(0, m_randomSpawnPoints.Count - 1)];
-            
             pos = newPosition;
 
-            //GameObject tempObject = GameObject.Instantiate(Resources.Load<GameObject>("PlayerQuad"));
-            //tempObject.transform.position = newPlayer.PlayerPosition;
+            GameObject tempObject = GameObject.Instantiate(Resources.Load<GameObject>("PlayerQuad"));
+            tempObject.transform.position = pos;
 
-
+            m_randomSpawnPoints.RemoveAt(index);
             m_playerList.Add(pos);
             Debug.Log(m_playerList[m_playerList.Count - 1]);
 
             return true;
         }
-            //else if (m_playerList.Count == 1)
-            //{
-            //    Vector2 player = m_playerList[0].PlayerPosition;
-            //    List<Vector2> vec = GetUnusedPoints(GetEmptyTiles(gridSystem));
-            //    float maxDist = -1;
-            //    Vector2 best = new Vector2(0, 0);
+        else if (m_playerList.Count == 1)
+        {
+            int index = 0;
+            Vector2 player = m_playerList[0];
+            float maxDist = -1;
+            Vector2 best = new Vector2(0, 0);
 
-            //    for (int i = 0; i < vec.Count; i++)
-            //    {
-            //        Vector2 rel = new Vector2(player.x - vec[i].x, player.y - vec[i].y);
-            //        float dist = Mathf.Abs(rel.x + rel.y);
-            //        if (dist > maxDist)
-            //        {
-            //            maxDist = dist;
-            //            best = rel;
-            //        }
-            //    }
-            //    Player newPlayer = new Player();
-            //    newPlayer.PlayerPosition = best;
-            //    newPlayer.PlayerIndex = m_playerList.Count;
-            //    m_playerList.Add(newPlayer);
-            //    return true;
-            //}
+            for (int i = 0; i < m_randomSpawnPoints.Count; i++)
+            {
+                Vector2 rel = m_randomSpawnPoints[i] - player;
+                float dist = rel.sqrMagnitude;
+                if (dist > maxDist)
+                {
+                    maxDist = dist;
+                    best = m_randomSpawnPoints[i];
+                    index = i;
+                }
+            }
+            GameObject tempObject = GameObject.Instantiate(Resources.Load<GameObject>("PlayerQuad"));
+            tempObject.transform.position = best;
+            m_playerList.Add(best);
+            m_randomSpawnPoints.RemoveAt(index);
+            return true;
+        }
         else if (m_playerList.Count >= 1 && m_playerList.Count < 4)
         {
-            Vector2 pos;
-            Vector2 newPosition = GetFurthestPoint(gridSystem);
+            int index = 0;
+            Vector2 player = new Vector2(0, 0);
 
-            pos = newPosition;
+            for (int i = 0; i < m_randomSpawnPoints.Count; i++)
+                player += m_randomSpawnPoints[i];
+
+            player /= m_randomSpawnPoints.Count;
+
+            float maxDist = -1;
+            Vector2 best = new Vector2(0, 0);
+
+            for (int i = 0; i < m_randomSpawnPoints.Count; i++)
+            {
+                Vector2 rel = m_randomSpawnPoints[i] - player;
+                float dist = rel.sqrMagnitude;
+                if (dist > maxDist)
+                {
+                    maxDist = dist;
+                    best = m_randomSpawnPoints[i];
+                    index = i;
+                }
+            }
+            GameObject tempObject = GameObject.Instantiate(Resources.Load<GameObject>("PlayerQuad"));
+            tempObject.transform.position = best;
+            m_playerList.Add(best);
+            m_randomSpawnPoints.RemoveAt(index);
+            return true;
+        }
+        else if (m_playerList.Count >= 1 && m_playerList.Count < 4)
+        {
+            Vector2 pos = GetFurthestPoint(gridSystem);
 
             //GameObject tempObject = GameObject.Instantiate(Resources.Load<GameObject>("PlayerQuad"));
             //tempObject.transform.position = newPlayer.PlayerPosition;
-
+            GameObject tempObject = GameObject.Instantiate(Resources.Load<GameObject>("PlayerQuad"));
+            tempObject.transform.position = pos;
 
             m_playerList.Add(pos);
             Debug.Log(m_playerList[m_playerList.Count - 1]);
@@ -90,7 +120,7 @@ public class SpawnPointGenerator {
         }
         else
             return false;
-        
+
     }
 
     private Vector2 GetFurthestPoint(GridSystem gridSystem)
@@ -106,18 +136,18 @@ public class SpawnPointGenerator {
 
         Vector2 furthestPoint = new Vector2();
         Vector2 difference = new Vector2(-999, -999);
+        int index = 0;
 
-        List<Vector2> positions = GetUnusedPoints(GetEmptyTiles(gridSystem));
-
-        for (int i = 0; i < positions.Count; i++)
+        for (int i = 0; i < m_randomSpawnPoints.Count; i++)
         {
-            if(difference.x + difference.y < Mathf.Abs(generalDistance.x - positions[i].x) + Mathf.Abs(generalDistance.y - positions[i].y))
+            if (difference.x + difference.y < Mathf.Abs(generalDistance.x - m_randomSpawnPoints[i].x) + Mathf.Abs(generalDistance.y - m_randomSpawnPoints[i].y))
             {
-                difference = new Vector2(Mathf.Abs(generalDistance.x - positions[i].x), Mathf.Abs(generalDistance.y - positions[i].y));
-                furthestPoint = positions[i];
+                difference = new Vector2(Mathf.Abs(generalDistance.x - m_randomSpawnPoints[i].x), Mathf.Abs(generalDistance.y - m_randomSpawnPoints[i].y));
+                furthestPoint = m_randomSpawnPoints[i];
+                index = i;
             }
         }
-
+        m_randomSpawnPoints.RemoveAt(index);
         Debug.Log(furthestPoint);
         return furthestPoint;
     }
@@ -132,13 +162,13 @@ public class SpawnPointGenerator {
         return v;
     }
 
-    private List<Vector2> GetUnusedPoints(List<Vector2> m_randomSpawnPoints)
+    private List<Vector2> GetUnusedPoints()
     {
         List<Vector2> v = new List<Vector2>();
-        for(int i = 0; i < m_randomSpawnPoints.Count; i++)
+        for (int i = 0; i < m_randomSpawnPoints.Count; i++)
         {
             Vector2 p = m_randomSpawnPoints[i];
-            for(int j = 0; j < m_playerList.Count; j++)
+            for (int j = 0; j < m_playerList.Count; j++)
             {
                 Vector2 p2 = m_playerList[j];
                 if (p.x == p2.x && p.y == p2.y)
@@ -163,5 +193,5 @@ public class SpawnPointGenerator {
     {
         return true;
     }
-    
+
 }

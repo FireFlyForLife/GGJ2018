@@ -18,9 +18,7 @@ public class RoomGenerator
     private Dictionary<Direction, IntVector2> m_directions = new Dictionary<Direction, IntVector2>();
     private Stack<RoomTransform> m_availablePositions;
     private GridSystem m_gridSystem;
-    private List<Vector2> m_payerPositions = new List<Vector2>();
 
-    public  List<Vector2> PlayerPositions { get { return m_payerPositions; } }
     public GridSystem GetGridSystem { get { return m_gridSystem; } }
 
     RoomTransform m_transform;
@@ -40,20 +38,17 @@ public class RoomGenerator
     public void GenerateRooms()
     {
         m_generating = true;
-        while(m_generating)
+        while (m_generating)
         {
             int roomSize = GetRoomSize();
 
             // update the current transform to the new room's center after placing it
             m_transform = SetTiles(m_transform, roomSize);
         }
-        
+
         // generate walls
         new WallGenerator(m_gridSystem);
-        new DoorGenerator(m_gridSystem);
-        new SectionGenerator(m_gridSystem, TileType.s01Wall, TileType.s02Wall, TileType.s03Wall, TileType.s04Wall);
-        SpawnPointGenerator s = new SpawnPointGenerator(m_gridSystem);
-        m_payerPositions = s.PlayerPositions;
+        new SpawnPointGenerator(m_gridSystem);
     }
 
     List<RoomTransform> GetTransformations(RoomTransform transform, int roomSize)
@@ -141,7 +136,7 @@ public class RoomGenerator
                 {
                     // push only 75% of the total possible paths to the stack
                     if (Random.Range(0, 100) > 50 && roomSize > 3 || roomSize == 9)
-                    m_availablePositions.Push(transforms[i]);
+                        m_availablePositions.Push(transforms[i]);
                 }
             }
 
