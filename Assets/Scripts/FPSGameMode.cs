@@ -20,10 +20,14 @@ public class FPSGameMode : MonoBehaviour
 
         world.worldMap = LinqConvert(generator.GetGridSystem.GetGrid);
 	    GameObject[] o =  GameObject.FindGameObjectsWithTag("Player");
+        List<FPSPlayer> players = new List<FPSPlayer>();
+	    for (int i = 0; i < o.Length; i++)
+	        players.Add(o[i].GetComponent<FPSPlayer>());
+
         for (int i = 0; i < generator.SpawnPointList.Count; i++)
         {
-            o[i].GetComponent<FPSPlayer>().SpawnPos = generator.SpawnPointList[i];
-            o[i].GetComponent<FPSPlayer>().SetPosition(generator.SpawnPointList[i]);
+            players[i % players.Count].SpawnPos.Add(generator.SpawnPointList[i]);
+            players[i % players.Count].GetComponent<FPSPlayer>().SetPosition(generator.SpawnPointList[i]);
         }
 
 	    //get the target and objective entities
@@ -41,7 +45,17 @@ public class FPSGameMode : MonoBehaviour
 
     void Update ()
     {
+
         RaycastEntity oldent = null;
+        foreach (var entity in world.Entities)
+        {
+            if (oldent != null)
+            {
+                Debug.DrawLine(entity.Position, oldent.Position, Color.red, 0.1f);
+            }
+            oldent = entity;
+        }
+
         foreach (var entity in world.Entities)
         {
             if (oldent != null)
