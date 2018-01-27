@@ -20,6 +20,7 @@ public class RoomGenerator
     private GridSystem m_gridSystem;
     private List<Vector2> m_payerPositions = new List<Vector2>();
 
+    public  List<Vector2> PlayerPositions { get { return m_payerPositions; } }
     public GridSystem GetGridSystem { get { return m_gridSystem; } }
 
     RoomTransform m_transform;
