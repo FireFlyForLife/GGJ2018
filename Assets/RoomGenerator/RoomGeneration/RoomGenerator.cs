@@ -18,6 +18,8 @@ public class RoomGenerator
     private Dictionary<Direction, IntVector2> m_directions = new Dictionary<Direction, IntVector2>();
     private Stack<RoomTransform> m_availablePositions;
     private GridSystem m_gridSystem;
+    private List<Vector2> m_playerList = new List<Vector2>();
+    public List<Vector2> SpawnPointList { get { return m_playerList; } }
 
     public GridSystem GetGridSystem { get { return m_gridSystem; } }
 
@@ -48,7 +50,8 @@ public class RoomGenerator
 
         // generate walls
         new WallGenerator(m_gridSystem);
-        new SpawnPointGenerator(m_gridSystem);
+        SpawnPointGenerator s = new SpawnPointGenerator(m_gridSystem);
+        m_playerList = s.SpawnPointList;
     }
 
     List<RoomTransform> GetTransformations(RoomTransform transform, int roomSize)

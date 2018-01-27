@@ -14,15 +14,21 @@ public class FPSGameMode : MonoBehaviour
 	    world = GetComponent<World2D>();
 
 	    RoomGenerator generator = new RoomGenerator();
-	    generator.GetGridSystem.SetGridSize(new IntVector2(10, 10));
-        //generator.GenerateRooms();
+	    generator.GetGridSystem.SetGridSize(new IntVector2(100, 100));
+        generator.GenerateRooms();
 
 
-        //world.worldMap = LinqConvert(generator.GetGridSystem.GetGrid);
+        world.worldMap = LinqConvert(generator.GetGridSystem.GetGrid);
+	    GameObject[] o =  GameObject.FindGameObjectsWithTag("Player");
+        for (int i = 0; i < generator.SpawnPointList.Count; i++)
+        {
+            o[i].GetComponent<FPSPlayer>().Position = generator.SpawnPointList[i];
+            //o[i].GetComponent<FPSPlayer>().Position.posY = generator.SpawnPointList[i].y;
+        }
 
-        //get the target and objective entities
+	    //get the target and objective entities
 	    //targetEntity = generator
-	    
+
 	}
 
     static int[,] LinqConvert(int[][] source)

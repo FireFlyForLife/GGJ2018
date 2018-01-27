@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum TileType {  empty = -1, floor = 0, wall, door, s01Wall, s02Wall, s03Wall, s04Wall }
+public enum TileType {  empty = -1, floor = 0, wall, door, s01Wall, s02Wall, s03Wall, s04Wall, item
+}
 
 public class GridSystem : GameSystem
 {
@@ -36,6 +37,8 @@ public class GridSystem : GameSystem
         for (int i = 0; i < a_size.Y; i++)
         {
             m_grid[i] = new int[a_size.X];
+            for (int j = 0; j < a_size.X; j++)
+                m_grid[i][j] = -1;
         }
         m_gridSize = a_size;
     }
