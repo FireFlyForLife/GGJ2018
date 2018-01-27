@@ -181,6 +181,7 @@ public class RaycastRenderer : MonoBehaviour
             wallX -= Mathf.Floor(wallX);
 
             //x coordinate on the texture
+            int texX_min = Mathf.RoundToInt(wallX * texWidth);
             int texX = Mathf.RoundToInt(wallX * texWidth * 8);
             if (side == 0 && rayDirX > 0) texX = texWidth - texX - 1;
             if (side == 1 && rayDirY < 0) texX = texWidth - texX - 1;
@@ -198,10 +199,31 @@ public class RaycastRenderer : MonoBehaviour
 
             for (int y = drawStart; y < drawEnd; y++)
             {
+                int d_min = y * 256 - Height * 128 + lineHeight * 128;  //256 and 128 factors to avoid floats
+                int texY_min = ((d_min * texHeight) / lineHeight) / 256;
                 int d = y * 256 * 8 - Height * 128 * 8 + lineHeight * 128 * 8;  //256 and 128 factors to avoid floats
-
                 int texY = ((d * texHeight) / lineHeight) / 256;
-                Color color = RaycastResources.Instance.Textures[texNum].GetPixel(texX, texY);
+
+                Texture2D tex = RaycastResources.Instance.Textures[texNum];
+                Color color;
+                if (texX - texX_min == 0 || texY - texY_min == 0)
+                {
+                    Color total = new Color();
+                    for (int i = texX_min; i < texX; i++)
+                    {
+                        for (int j = texY_min; j < texY; j++)
+                        {
+                            total += tex.GetPixel(i, j);
+                        }
+                    }
+
+                    color = total / ((texX - texX_min) * (texY - texY_min));
+                }
+                else
+                {
+                    color = tex.GetPixel(texX, texY);
+                }
+
                 if (side == 1)
                 {
                     color = color / 2f;
