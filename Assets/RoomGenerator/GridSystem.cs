@@ -2,7 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum TileType {  empty = -1, floor = 0, wall, door, s01Wall, s02Wall, s03Wall, s04Wall, item
+public enum TileType
+{
+    nodoor = -2, empty = -1, floor = 0, wall, door, s01Wall, s02Wall, s03Wall, s04Wall, item
+}
+
+public static class TileTypeExtensions
+{
+    public static bool IsWalkable(this TileType tile)
+    {
+        return tile == TileType.floor || tile == TileType.nodoor;
+    }
+
+    public static bool IsWalkable(int tiletype)
+    {
+        TileType tile = (TileType)tiletype;
+        return tile == TileType.floor || tile == TileType.nodoor;
+    }
 }
 
 public class GridSystem : GameSystem
@@ -59,6 +75,27 @@ public class GridSystem : GameSystem
         }
         return valid;
     }
+
+    //Note: returns the AABB around the pos, with each side being 'radius' far away
+    public List<IntVector2> GetWithinRange(Vector2 pos, float radius)
+    {
+        List<IntVector2> tiles = new List<IntVector2>();
+
+        IntVector2 intpos = new IntVector2((int)pos.x, (int)pos.y);
+        IntVector2 min = new IntVector2((int)(intpos.X - radius), (int)(intpos.Y - radius));
+        IntVector2 max = new IntVector2((int)(intpos.X + radius), (int)(intpos.Y + radius));
+
+        for (int x = min.X; x < max.X; x++)
+        {
+            for (int y = min.Y; y < max.Y; y++)
+            {
+                tiles.Add(new IntVector2(x, y));
+            }
+        }
+
+        return tiles;
+    }
+
 
     public void SetOccupied(int x, int y, TileType type)
     {

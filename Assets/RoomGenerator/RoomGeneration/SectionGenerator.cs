@@ -14,6 +14,9 @@ public class SectionGenerator : MonoBehaviour {
             bool left = (x < gSizeX / 2);
             for (int y = 0; y < gSizeY; y++)
             {
+                if (system.GetTile(x, y) != TileType.wall)
+                    continue;
+
                 bool top = (y < gSizeY / 2);
                 if (top)
                 {

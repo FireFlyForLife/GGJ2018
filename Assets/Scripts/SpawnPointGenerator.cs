@@ -80,7 +80,7 @@ public class SpawnPointGenerator
         {
             for (int y = -2; y <= 2; y++)
             {
-                if (gSystem.GetTile((int)newPosition.x + x, (int)newPosition.y + y) != TileType.floor)
+                if (!gSystem.GetTile((int)newPosition.x + x, (int)newPosition.y + y).IsWalkable())
                     return false;
             }
         }
@@ -121,7 +121,7 @@ public class SpawnPointGenerator
         List<Vector2> v = new List<Vector2>();
         for (int y = 0; y < gridSystem.GridSize.Y; y++)
             for (int x = 0; x < gridSystem.GridSize.Y; x++)
-                if (gridSystem.GetTile(x, y) == TileType.floor)
+                if (gridSystem.GetTile(x, y).IsWalkable())
                     v.Add(new Vector2(x, y));
         return v;
     }
