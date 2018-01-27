@@ -160,7 +160,7 @@ public class GridSystem : GameSystem
                 side = 1;
             }
             //Check if ray has hit a wall
-            if (World.worldMap[mapX, mapY] > 0)
+            if (World.worldMap[mapY, mapX] > 0)
             {
                 hit = 1;
             }

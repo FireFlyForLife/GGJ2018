@@ -11,20 +11,16 @@ public class SpawnPointGenerator {
     public List<Vector2> SpawnPointList { get { return m_playerList; } }
 
 
-    public SpawnPointGenerator(GridSystem a_gridSystem)
+    public SpawnPointGenerator(GridSystem gSystem)
     {
-        m_randomSpawnPoints = GetEmptyTiles(a_gridSystem);
-        for(int i = 0; i < 4; i++)
-            if (!SpawnPlayer(a_gridSystem))
+        m_randomSpawnPoints = GetEmptyTiles(gSystem);
+
+        for (int i = 0; i < 4; i++)
+            if(!SpawnPlayer(gSystem))
                 return;
 
-        Vector2 item = GetAndOccupyPosRange();
-        a_gridSystem.SetOccupied((int)item.x,(int)item.y,TileType.item);
-    }
-
-    public void Init(GridSystem a_gridSystem)
-    {
-        m_randomSpawnPoints = GetEmptyTiles(a_gridSystem);
+        Vector2 pos = GetAndOccupyPosRange(gSystem);
+        gSystem.SetOccupied((int)pos.x,(int)pos.y,TileType.item);
     }
 
     public bool SpawnPlayer(GridSystem gridSystem)
@@ -33,9 +29,8 @@ public class SpawnPointGenerator {
 
         if (m_playerList.Count < 4)
         {
-            Vector2 newPlayer;
             //bool checkPlayers = false;
-            newPlayer = GetAndOccupyPosRange();
+            Vector2 newPlayer = GetAndOccupyPosRange(gridSystem);
 
  // newPlayer.PlayerIndex = m_playerList.Count;
 
@@ -93,10 +88,20 @@ public class SpawnPointGenerator {
         
     }
 
-    public Vector2 GetAndOccupyPosRange()
+    public Vector2 GetAndOccupyPosRange(GridSystem gridSystem)
     {
         int randomNumber = UnityEngine.Random.Range(0, m_randomSpawnPoints.Count - 1);
-        Vector2 newPosition = m_randomSpawnPoints[randomNumber];
+
+        Vector2 newPosition = new Vector2(0, 0);
+        while (m_randomSpawnPoints.Count > 0)
+        {
+            newPosition = m_randomSpawnPoints[randomNumber];
+            if (HasSpace(gridSystem, newPosition))
+                break;
+
+            m_randomSpawnPoints.RemoveAt(randomNumber);
+            randomNumber = UnityEngine.Random.Range(0, m_randomSpawnPoints.Count - 1);
+        }
 
         m_randomSpawnPoints.RemoveAt(randomNumber);
 
@@ -112,6 +117,20 @@ public class SpawnPointGenerator {
         }
 
         return newPosition;
+    }
+
+    // return if the tile has floor tiles around it
+    private bool HasSpace(GridSystem gSystem, Vector2 newPosition)
+    {
+        for (int x = -2; x <= 2; x++)
+        {
+            for (int y = -2; y <= 2; y++)
+            {
+                if (gSystem.GetTile((int)newPosition.x + x, (int)newPosition.y + y) != TileType.floor)
+                    return false;
+            }
+        }
+        return true;
     }
 
     private Vector2 GetFurthestPoint(GridSystem gridSystem)
