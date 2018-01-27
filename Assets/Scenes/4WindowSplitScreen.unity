@@ -350,7 +350,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 123, y: 55}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 100.97, y: 159.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &97065812
 MonoBehaviour:
@@ -382,9 +382,9 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 0f32f84ea286d2e499d38e3ccfb987f5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 08037990dce98454a8c0739c56bc67e3, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -867,7 +867,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 123, y: 55}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 100.97, y: 159.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &307506686
 MonoBehaviour:
@@ -899,9 +899,9 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 0f32f84ea286d2e499d38e3ccfb987f5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 08037990dce98454a8c0739c56bc67e3, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -1513,7 +1513,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.3
 --- !u!114 &684068627
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1530,6 +1530,7 @@ MonoBehaviour:
   TextureId: 0
   SplashEffect: {fileID: 5913472}
   PlayerNumber: 0
+  DistIndicator: {fileID: 1524982148}
   MovementSpeed: 5
   TurnSpeed: 3
   ShotRange: 10
@@ -1858,7 +1859,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.3
 --- !u!114 &908049550
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1875,6 +1876,7 @@ MonoBehaviour:
   TextureId: 0
   SplashEffect: {fileID: 925776092}
   PlayerNumber: 1
+  DistIndicator: {fileID: 307506687}
   MovementSpeed: 5
   TurnSpeed: 3
   ShotRange: 10
@@ -2140,7 +2142,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.3
 --- !u!114 &1061236486
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2157,6 +2159,7 @@ MonoBehaviour:
   TextureId: 0
   SplashEffect: {fileID: 487773632}
   PlayerNumber: 3
+  DistIndicator: {fileID: 97065813}
   MovementSpeed: 5
   TurnSpeed: 3
   ShotRange: 10
@@ -2506,7 +2509,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 123, y: 55}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 100.97, y: 159.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1414168538
 MonoBehaviour:
@@ -2538,9 +2541,9 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 0f32f84ea286d2e499d38e3ccfb987f5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 08037990dce98454a8c0739c56bc67e3, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -2654,7 +2657,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 123, y: 55}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 100.97, y: 159.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1524982147
 MonoBehaviour:
@@ -2686,9 +2689,9 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 0f32f84ea286d2e499d38e3ccfb987f5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 08037990dce98454a8c0739c56bc67e3, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -3497,7 +3500,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.3
 --- !u!114 &2036118309
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3514,6 +3517,7 @@ MonoBehaviour:
   TextureId: 0
   SplashEffect: {fileID: 76653223}
   PlayerNumber: 2
+  DistIndicator: {fileID: 1414168539}
   MovementSpeed: 5
   TurnSpeed: 3
   ShotRange: 10
