@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
         // generate the rooms
         m_roomGenerator = new RoomGenerator();
         m_roomGenerator.GetGridSystem.SetGridSize(new IntVector2(100,100));
-        m_roomGenerator.GenerateRooms();
+        //m_roomGenerator.GenerateRooms();
 
        
 
