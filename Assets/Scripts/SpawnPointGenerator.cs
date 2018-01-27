@@ -12,12 +12,17 @@ public class SpawnPointGenerator
     public List<Vector2> SpawnPointList { get { return m_playerList; } }
 
 
-    public SpawnPointGenerator(GridSystem gSystem)
+    public SpawnPointGenerator(GridSystem gSystem, World2D world)
     {
         m_randomSpawnPoints = GetEmptyTiles(gSystem);
 
-        Vector2 pos = GetAndOccupyPosRange(gSystem);
-        gSystem.SetOccupied((int)pos.x, (int)pos.y, TileType.item);
+        Vector2 pos = GetWithoutOccupyRange(gSystem,true);
+        GameObject o = new GameObject();
+        o.AddComponent<RaycastEntity>();
+        RaycastEntity entity = o.GetComponent<RaycastEntity>();
+        world.Entities.Add(entity);
+        //gSystem.SetOccupied((int)pos.x, (int)pos.y, TileType.item);
+
 
         for (int i = 0; i < 32; i++)
             if (!SpawnPlayer(gSystem))
@@ -37,60 +42,30 @@ public class SpawnPointGenerator
         m_playerList.Add(newPlayer);
         Debug.Log(m_randomSpawnPoints.Count);
 
- // newPlayer.PlayerIndex = m_playerList.Count;
+        return true;
+    }
 
-            //GameObject tempObject = GameObject.Instantiate(Resources.Load<GameObject>("PlayerQuad"));
-            //tempObject.transform.position = newPlayer;
+    public Vector2 GetWithoutOccupyRange(GridSystem gridSystem, bool occupyTile = false)
+    {
+        int randomNumber = UnityEngine.Random.Range(0, m_randomSpawnPoints.Count - 1);
 
-            m_playerList.Add(newPlayer);
-           // Debug.Log(m_randomSpawnPoints.Count);
+        Vector2 newPosition = new Vector2(0, 0);
+        while (m_randomSpawnPoints.Count > 0)
+        {
+            newPosition = m_randomSpawnPoints[randomNumber];
+            if (HasSpace(gridSystem, newPosition))
+                break;
 
-            return true;
+            m_randomSpawnPoints.RemoveAt(randomNumber);
+            randomNumber = UnityEngine.Random.Range(0, m_randomSpawnPoints.Count - 1);
         }
-        //else if (m_playerList.Count == 1)
-        //{
-        //    Vector2 player = m_playerList[0].PlayerPosition;
-        //    List<Vector2> vec = GetUnusedPoints(GetEmptyTiles(gridSystem));
-        //    float maxDist = -1;
-        //    Vector2 best = new Vector2(0, 0);
+        if (m_randomSpawnPoints.Count <= 0)
+            return new Vector2(-1, -1);
 
-        //    for (int i = 0; i < vec.Count; i++)
-        //    {
-        //        Vector2 rel = new Vector2(player.x - vec[i].x, player.y - vec[i].y);
-        //        float dist = Mathf.Abs(rel.x + rel.y);
-        //        if (dist > maxDist)
-        //        {
-        //            maxDist = dist;
-        //            best = rel;
-        //        }
-        //    }
-        //    Player newPlayer = new Player();
-        //    newPlayer.PlayerPosition = best;
-        //    newPlayer.PlayerIndex = m_playerList.Count;
-        //    m_playerList.Add(newPlayer);
-        //    return true;
-        //}
-        //else if (m_playerList.Count >= 1 && m_playerList.Count < 4)
-        //{
-        //    Player newPlayer = new Player();
+        if (occupyTile)
+            m_randomSpawnPoints.RemoveAt(randomNumber);
 
-        //    Vector2 newPosition = GetFurthestPoint(gridSystem);
-
-        //    newPlayer.PlayerPosition = newPosition;
-        //    newPlayer.PlayerIndex = m_playerList.Count;
-
-        //    GameObject tempObject = GameObject.Instantiate(Resources.Load<GameObject>("PlayerQuad"));
-        //    tempObject.transform.position = newPlayer.PlayerPosition;
-
-
-        //    m_playerList.Add(newPlayer);
-        //    //Debug.Log(m_playerList[m_playerList.Count - 1].PlayerPosition);
-
-        //    return true;
-        //}
-        else
-            return false;
-        
+        return newPosition;
     }
 
     public Vector2 GetAndOccupyPosRange(GridSystem gridSystem)
@@ -211,4 +186,4 @@ public class SpawnPointGenerator
         return true;
     }
 
-}
+}
