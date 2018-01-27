@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum TileType { NULL = -1, empty = 0, floor, wall, door, s01Wall, s02Wall, s03Wall, s04Wall
+public enum TileType {
+    empty = -1, floor = 0, wall, door, s01Wall, s02Wall, s03Wall, s04Wall
 }
 
 public class GridSystem : GameSystem
@@ -65,7 +66,7 @@ public class GridSystem : GameSystem
 
     public TileType GetTile(int x, int y)
     {
-        if (!IsWithinGrid(x, y)) return TileType.NULL;
+        if (!IsWithinGrid(x, y)) return TileType.empty;
         else return (TileType)m_grid[y][x];
     }
 

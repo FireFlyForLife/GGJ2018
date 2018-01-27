@@ -16,11 +16,43 @@ public class FPSPlayer : RaycastEntity
 
     public float ShotRange = 10f;
 
-    public RaycastRenderer renderer;
+    private int health = 100;
+    public float HitShowTime = 0.3f;
+    private float lastHitTime = float.MinValue;
+    public int Health
+    {
+        get { return health; }
+        set
+        {
+            health = value;
+            lastHitTime = Time.time;
+
+            //if (Health <= 0)
+            //    enabled = false;
+        }
+    }
+
+    public bool IsAlive
+    {
+        get { return health > 0; }
+    }
+
+    public Color GetColor()
+    {
+        if (lastHitTime + HitShowTime > Time.time )
+            return Color.red;
+
+        if (PlayerNumber < 2)
+            return Color.blue;
+        else
+            return Color.green;
+    }
+
+    public RaycastRenderer Renderer;
     public World2D World
     {
-        get { return renderer.World; }
-        set { renderer.World = value; }
+        get { return Renderer.World; }
+        set { Renderer.World = value; }
     }
 
     //private double posX = 22, posY = 12;  //x and y start position
@@ -33,15 +65,17 @@ public class FPSPlayer : RaycastEntity
     void Start ()
 	{
 	    collider2D = GetComponent<Collider2D>();
-	    X = renderer.posX;
-	    Y = renderer.posY;
-	    dirX = renderer.dirX;
-	    dirY = renderer.dirY;
-	    planeX = renderer.planeX;
-	    planeY = renderer.planeY;
+	    X = Renderer.posX;
+	    Y = Renderer.posY;
+	    dirX = Renderer.dirX;
+	    dirY = Renderer.dirY;
+	    planeX = Renderer.planeX;
+	    planeY = Renderer.planeY;
 
 	    TextureId = 0;
 	    World.Entities.Add(this);
+
+	    IsPlayer = true;
 	}
 	
 	// Update is called once per frame
@@ -104,7 +138,7 @@ public class FPSPlayer : RaycastEntity
          
            
             Vector2 hitVector = new Vector2();
-            if (GridSystem.IntersectsElement(start, dir, World, renderer.Rect.rect.width, out hitVector) == true)
+            if (GridSystem.IntersectsElement(start, dir, World, Renderer.Rect.rect.width, out hitVector) == true)
             {
                
                 int amount = Physics2D.Raycast(line.Start, dir, filter, hits, (hitVector - line.Start).magnitude);
@@ -115,9 +149,14 @@ public class FPSPlayer : RaycastEntity
                         for (var i = 0; i < amount; i++)
                         {
                             var hit = hits[i];
-                            if (hit.collider != collider2D)
+                            if (hit.collider == collider2D)
+                                continue;
+
+                            Debug.Log("Shot someone!!!");
+                            var player = hit.collider.GetComponent<FPSPlayer>();
+                            if (player)
                             {
-                                Debug.Log("Shot someone!!!");
+                                player.Health -= 100;
                             }
                         }
                    
@@ -126,28 +165,16 @@ public class FPSPlayer : RaycastEntity
                 else
                     return;
             }
-
-           /* if (amount > 0)
-            {
-                for (var i = 0; i < amount; i++)
-                {
-                    var hit = hits[i];
-                    if (hit.collider != collider2D)
-                    {
-                        Debug.Log("Shot someone!!!");
-                    }
-                }
-            }*/
         }
     }
 
     void UpdateRendererPosition()
     {
-        renderer.posX = X;
-        renderer.posY = Y;
-        renderer.dirX = dirX;
-        renderer.dirY = dirY;
-        renderer.planeX = planeX;
-        renderer.planeY = planeY;
+        Renderer.posX = X;
+        Renderer.posY = Y;
+        Renderer.dirX = dirX;
+        Renderer.dirY = dirY;
+        Renderer.planeX = planeX;
+        Renderer.planeY = planeY;
     }
 }

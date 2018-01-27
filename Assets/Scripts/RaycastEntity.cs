@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class RaycastEntity : MonoBehaviour
 {
+    public bool IsPlayer = false;
+
     public float X
     {
         set

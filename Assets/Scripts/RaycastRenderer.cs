@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using NUnit.Framework.Constraints;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -229,7 +230,7 @@ public class RaycastRenderer : MonoBehaviour
                     color = color / 2f;
                     color.a = 1;
                 }
-                //buffer[y * texHeight + x] = color;//TODO: fix
+                //buffer[y * texHeight + x] = color;
                 texture.SetPixel(x, y, color);
             }
 
@@ -250,16 +251,22 @@ public class RaycastRenderer : MonoBehaviour
 
         //SPRITE CASTING
         //sort sprites from far to close
+        int activeSprites = 0;
         for (int i = 0; i < Sprites.Count; i++)
         {
-            spriteOrder[i] = i;
-            spriteDistance[i] = ((posX - Sprites[i].X) * (posX - Sprites[i].X) + (posY - Sprites[i].Y) * (posY - Sprites[i].Y)); //sqrt not taken, unneeded
+            if (!Sprites[i].IsPlayer || ((FPSPlayer)Sprites[i]).IsAlive)
+            {
+                ++activeSprites;
+                spriteOrder[i] = i;
+                spriteDistance[i] = ((posX - Sprites[i].X) * (posX - Sprites[i].X) +
+                                     (posY - Sprites[i].Y) * (posY - Sprites[i].Y)); //sqrt not taken, unneeded
+            }
         }
 
-        comboSort(spriteOrder, spriteDistance, Sprites.Count);
+        comboSort(spriteOrder, spriteDistance, activeSprites);
 
         //after sorting the sprites, do the projection and draw them
-        for (int i = 0; i < Sprites.Count; i++)
+        for (int i = 0; i < activeSprites; i++)
         {
             //translate sprite position to relative to camera
             double spriteX = Sprites[spriteOrder[i]].X - posX;
@@ -332,8 +339,14 @@ public class RaycastRenderer : MonoBehaviour
                         int texY = ((d * this.texHeight) / spriteHeight) / 256;
                         // spriteWidth * texY + texX]; //get current color from the texture
 
+                        //TODO: Move out of expensive loop
                         Color color = RaycastResources.Instance.SpriteRegistery[Sprites[spriteOrder[i]].TextureId].texture.GetPixel(texX, texY);
-
+                        var player = Sprites[spriteOrder[i]];
+                        if (player.IsPlayer)
+                        {
+                            var teamcolor = ((FPSPlayer)player).GetColor();
+                            color = color * teamcolor;
+                        }
                         //if ((color & 0x00FFFFFF) != 0) buffer[y, stripe] = color; //paint pixel if it isn't black, black is the invisible color
                         if (Math.Abs(color.a - 1) < 0.1f)
                             texture.SetPixel(stripe, y, color);

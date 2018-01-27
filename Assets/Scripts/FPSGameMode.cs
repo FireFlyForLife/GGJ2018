@@ -12,8 +12,9 @@ public class FPSGameMode : MonoBehaviour
 	    world = GetComponent<World2D>();
 
 	    RoomGenerator generator = new RoomGenerator();
-	    generator.GetGridSystem.SetGridSize(new IntVector2(100, 100));
-	    generator.GenerateRooms();
+	    generator.GetGridSystem.SetGridSize(new IntVector2(10, 10));
+	    //generator.GenerateRooms();
+        
 
 	    //world.worldMap = LinqConvert(generator.GetGridSystem.GetGrid);
 	    

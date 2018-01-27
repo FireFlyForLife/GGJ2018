@@ -35,7 +35,7 @@ public class SpawnPointGenerator {
         {
             Vector2 pos;
             //bool checkPlayers = false;
-
+            m_randomSpawnPoints = GetEmptyTiles(gridSystem);
             Vector2 newPosition = m_randomSpawnPoints[UnityEngine.Random.Range(0, m_randomSpawnPoints.Count - 1)];
             
             pos = newPosition;

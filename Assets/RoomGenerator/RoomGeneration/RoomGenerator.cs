@@ -51,7 +51,7 @@ public class RoomGenerator
         // generate walls
         new WallGenerator(m_gridSystem);
         new DoorGenerator(m_gridSystem);
-        new SectionGenerator(m_gridSystem, TileType.s01Wall, TileType.s02Wall, TileType.s03Wall, TileType.s04Wall);
+        //new SectionGenerator(m_gridSystem, TileType.s01Wall, TileType.s02Wall, TileType.s03Wall, TileType.s04Wall);
         SpawnPointGenerator s = new SpawnPointGenerator(m_gridSystem);
         m_payerPositions = s.PlayerPositions;
     }
@@ -141,7 +141,7 @@ public class RoomGenerator
                 {
                     // push only 75% of the total possible paths to the stack
                     if (Random.Range(0, 100) > 50 && roomSize > 3 || roomSize == 9)
-                    m_availablePositions.Push(transforms[i]);
+                        m_availablePositions.Push(transforms[i]);
                 }
             }
 

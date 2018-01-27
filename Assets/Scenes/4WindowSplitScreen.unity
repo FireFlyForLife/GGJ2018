@@ -261,7 +261,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 273158022}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -293.2, y: -128.98691, z: 0}
+  m_LocalPosition: {x: -293.2, y: -195.67815, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 606083842}
@@ -512,7 +512,8 @@ MonoBehaviour:
   MovementSpeed: 5
   TurnSpeed: 3
   ShotRange: 10
-  renderer: {fileID: 182812042}
+  hitShowTime: 0.3
+  Renderer: {fileID: 182812042}
 --- !u!1 &775521117
 GameObject:
   m_ObjectHideFlags: 0
@@ -537,7 +538,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 775521117}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 107.899994, y: 85.98311, z: 0}
+  m_LocalPosition: {x: 107.899994, y: 19.29187, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1985069533}
@@ -642,7 +643,8 @@ MonoBehaviour:
   MovementSpeed: 5
   TurnSpeed: 3
   ShotRange: 10
-  renderer: {fileID: 1985069534}
+  hitShowTime: 0.3
+  Renderer: {fileID: 1985069534}
 --- !u!1 &962244029
 GameObject:
   m_ObjectHideFlags: 0
@@ -769,7 +771,8 @@ MonoBehaviour:
   MovementSpeed: 5
   TurnSpeed: 3
   ShotRange: 10
-  renderer: {fileID: 1675670498}
+  hitShowTime: 0.3
+  Renderer: {fileID: 1675670498}
 --- !u!1 &1174287439
 GameObject:
   m_ObjectHideFlags: 0
@@ -853,8 +856,8 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1174287439}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 426.5, y: 165.5, z: 0}
-  m_LocalScale: {x: 1.06625, y: 1.06625, z: 1.06625}
+  m_LocalPosition: {x: 283, y: 157, z: 0}
+  m_LocalScale: {x: 0.7075, y: 0.7075, z: 0.7075}
   m_Children:
   - {fileID: 1518430062}
   - {fileID: 775521118}
@@ -910,7 +913,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1518430061}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -294.77, y: 85.78311, z: 0}
+  m_LocalPosition: {x: -294.77, y: 19.091873, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 182812041}
@@ -1133,7 +1136,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1922385079}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 107.609985, y: -125.36691, z: 0}
+  m_LocalPosition: {x: 107.609985, y: -192.05815, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1675670497}
@@ -1423,4 +1426,5 @@ MonoBehaviour:
   MovementSpeed: 5
   TurnSpeed: 3
   ShotRange: 10
-  renderer: {fileID: 606083843}
+  hitShowTime: 0.3
+  Renderer: {fileID: 606083843}
