@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ObjectIndicator : MonoBehaviour {
 
@@ -16,28 +17,50 @@ public class ObjectIndicator : MonoBehaviour {
     void Start()
     {
         //ccd  m_playerPosition = m_gameManager.RoomGenerator.SpawnPointGenerator.SpawnPointList[PlayerNumber];
-        m_objectPosition = new Vector2(0, 0); 
+        m_objectPosition = new Vector2(0, 0);
+     //    this.GetComponent<Image>().enabled = true;
+
     }
-	
-	// Update is called once per frame
-	void Update () {
+// Update is called once per frame
+void Update () {
         //Debug.Log(m_playerPosition);
         CheckDistance();
     }
 
+    int counter = 0;
     private void CheckDistance()
     {
-        this.enabled = false;
+        // this.enabled = false;
         //Debug.Log("BUGGER");
+        Debug.Log((m_objectPosition - m_playerVec).sqrMagnitude);
 
-        if ((m_objectPosition - m_playerVec).sqrMagnitude < 50)
+      
+
+        if ((m_objectPosition - m_playerVec).sqrMagnitude < 4000)
             {
-            this.enabled = true;
-           // Debug.Log("OEEEEEHh");
+            //this.enabled = true;
+            //GetComponent<Image>();
+            Debug.Log("OEEEEEHh");
+
+            Component test = GetComponent<Image>();// = false;
+
+            counter = 0;
+            //counter++;
+            if (counter == 0)
+            {
+                GetComponent<Image>().enabled = false;
+                counter++;
+            }
+            if(counter == 1)
+            {
+                GetComponent<Image>().enabled = true;
+                counter = 0;
+            }
         }
+        //else
+            //this.GetComponent<Image>().enabled = true;
 
 
-  
     }
 
     public Vector2 GetPositions(int posX, int posY, int Index)
