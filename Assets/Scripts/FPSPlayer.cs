@@ -20,7 +20,7 @@ public class FPSPlayer : RaycastEntity
     public float HitShowTime = 0.3f;
     private float lastHitTime = float.MinValue;
     private Vector2 spawnPos;
-    public  Vector2 SetSpawnPos { get { return spawnPos; } set { spawnPos = value; } }
+    public  Vector2 SpawnPos { get { return spawnPos; } set { spawnPos = value; } }
 
     public int Health
     {

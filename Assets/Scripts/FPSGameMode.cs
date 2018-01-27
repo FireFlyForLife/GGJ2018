@@ -22,7 +22,7 @@ public class FPSGameMode : MonoBehaviour
 	    GameObject[] o =  GameObject.FindGameObjectsWithTag("Player");
         for (int i = 0; i < generator.SpawnPointList.Count; i++)
         {
-
+            o[i].GetComponent<FPSPlayer>().SpawnPos = generator.SpawnPointList[i];
             o[i].GetComponent<FPSPlayer>().SetPosition(generator.SpawnPointList[i]);
         }
 
