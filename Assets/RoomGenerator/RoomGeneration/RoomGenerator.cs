@@ -18,6 +18,7 @@ public class RoomGenerator
     private Dictionary<Direction, IntVector2> m_directions = new Dictionary<Direction, IntVector2>();
     private Stack<RoomTransform> m_availablePositions;
     private GridSystem m_gridSystem;
+    private List<Vector2> m_payerPositions = new List<Vector2>();
 
     public GridSystem GetGridSystem { get { return m_gridSystem; } }
 
@@ -50,6 +51,8 @@ public class RoomGenerator
         new WallGenerator(m_gridSystem);
         new DoorGenerator(m_gridSystem);
         new SectionGenerator(m_gridSystem, TileType.s01Wall, TileType.s02Wall, TileType.s03Wall, TileType.s04Wall);
+        SpawnPointGenerator s = new SpawnPointGenerator(m_gridSystem);
+        m_payerPositions = s.PlayerPositions;
     }
 
     List<RoomTransform> GetTransformations(RoomTransform transform, int roomSize)
