@@ -23,7 +23,7 @@ public class FPSGameMode : MonoBehaviour
         for (int i = 0; i < generator.SpawnPointList.Count; i++)
         {
 
-            o[i].GetComponent<FPSPlayer>().SetPosition(generator.GetGridSystem, generator.SpawnPointList[i]);
+            o[i].GetComponent<FPSPlayer>().SetPosition(generator.SpawnPointList[i]);
         }
 
 	    //get the target and objective entities
