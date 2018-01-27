@@ -20,6 +20,8 @@ public class RoomGenerator
     private GridSystem m_gridSystem;
     private List<Vector2> m_playerList = new List<Vector2>();
     public List<Vector2> SpawnPointList { get { return m_playerList; } }
+    private SpawnPointGenerator s;
+    public SpawnPointGenerator SpawnPointGenerator { get { return s; } }
 
     public GridSystem GetGridSystem { get { return m_gridSystem; } }
 
@@ -37,7 +39,7 @@ public class RoomGenerator
         m_transform = new RoomTransform(new IntVector2(5, 5), Direction.none, 0);
     }
 
-    public void GenerateRooms()
+    public void GenerateRooms(World2D world)
     {
         m_generating = true;
         while (m_generating)
@@ -52,7 +54,7 @@ public class RoomGenerator
         new WallGenerator(m_gridSystem);
         new DoorGenerator(m_gridSystem);
         new SectionGenerator(m_gridSystem, TileType.s01Wall, TileType.s02Wall, TileType.s03Wall, TileType.s04Wall);
-        SpawnPointGenerator s = new SpawnPointGenerator(m_gridSystem);
+        SpawnPointGenerator s = new SpawnPointGenerator(m_gridSystem, world);
         m_playerList = s.SpawnPointList;
     }
 

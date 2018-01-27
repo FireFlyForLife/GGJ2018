@@ -74,18 +74,34 @@ public class RaycastRenderer : MonoBehaviour
         ImageComponent.texture = texture;
     }
 
+
+ //   int counter = 0;
+
     void Update()
     {
+
+
         if (!texture || !gameObject.activeInHierarchy)
-            return; //Start has not been executed
+            return; //Start has not been executed    
+      
 
         RenderImage();
+
+        //-----------------------------UI----------------------------------------///
+
+        GameObject.Find("Indicator1").GetComponent<ObjectIndicator>().GetPositions((int)posX, (int)posY, 0);
+        GameObject.Find("Indicator2").GetComponent<ObjectIndicator>().GetPositions((int)posX, (int)posY, 1);
+        GameObject.Find("Indicator3").GetComponent<ObjectIndicator>().GetPositions((int)posX, (int)posY, 2);
+        GameObject.Find("Indicator4").GetComponent<ObjectIndicator>().GetPositions((int)posX, (int)posY, 3);
+
         ClearScreen();
         //HandleInput();
     }
 
+
     void RenderImage()
     {
+      
         if (posX < 0 || posY < 0)
             Debug.Log(posX + " : " + posY);
         if (World.worldMap[(int)posY, (int)posX] > 0)
@@ -355,7 +371,9 @@ public class RaycastRenderer : MonoBehaviour
         }
 
         texture.Apply(false);
+
     }
+
 
     void ClearScreen()
     {

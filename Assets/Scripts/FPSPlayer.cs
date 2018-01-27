@@ -36,6 +36,7 @@ public class FPSPlayer : RaycastEntity
                 // never spawn at the same position twice
                 SetPosition(spawnPos[spawnIndex]);
                 spawnIndex = ++spawnIndex % spawnPos.Count;
+                health = 100;
             }
             //enabled = false;
         }

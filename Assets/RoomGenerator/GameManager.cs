@@ -7,6 +7,9 @@ public class GameManager : MonoBehaviour
     private Dictionary<Type, GameSystem> m_gameSystems;
     private List<GameSystem> m_updatableSystems;
 
+    private RoomGenerator m_roomGenerator;
+    public RoomGenerator RoomGenerator { get { return m_roomGenerator; } }
+
     void Start()
     {
         //m_gameSystems = new Dictionary<Type, GameSystem>();
@@ -15,16 +18,19 @@ public class GameManager : MonoBehaviour
         //Add<GridSystem>();
 
         // generate the rooms
-        RoomGenerator generator = new RoomGenerator();
-        generator.GetGridSystem.SetGridSize(new IntVector2(100,100));
-        generator.GenerateRooms();
+        m_roomGenerator = new RoomGenerator();
+        m_roomGenerator.GetGridSystem.SetGridSize(new IntVector2(100,100));
+        //m_roomGenerator.GenerateRooms();
 
-        int[][] grid = generator.GetGridSystem.GetGrid;
-        TileType type = generator.GetGridSystem.GetTile(0, 1);
+       
+
+        int[][] grid = m_roomGenerator.GetGridSystem.GetGrid;
+        TileType type = m_roomGenerator.GetGridSystem.GetTile(0, 1);
     }
 
     void Update()
     {
+       
         //for (int i = 0; i < m_updatableSystems.Count; i++)
         //{
         //    m_updatableSystems[i].Update();
