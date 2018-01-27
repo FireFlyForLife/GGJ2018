@@ -39,7 +39,7 @@ public class RoomGenerator
         m_transform = new RoomTransform(new IntVector2(5, 5), Direction.none, 0);
     }
 
-    public void GenerateRooms()
+    public void GenerateRooms(World2D world)
     {
         m_generating = true;
         while (m_generating)

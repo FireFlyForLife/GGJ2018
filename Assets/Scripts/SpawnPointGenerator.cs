@@ -12,12 +12,17 @@ public class SpawnPointGenerator
     public List<Vector2> SpawnPointList { get { return m_playerList; } }
 
 
-    public SpawnPointGenerator(GridSystem gSystem)
+    public SpawnPointGenerator(GridSystem gSystem, World2D world)
     {
         m_randomSpawnPoints = GetEmptyTiles(gSystem);
 
-        Vector2 pos = GetAndOccupyPosRange(gSystem);
-        gSystem.SetOccupied((int)pos.x, (int)pos.y, TileType.item);
+        Vector2 pos = GetWithoutOccupy(gSystem,true);
+        GameObject o = new GameObject();
+        o.AddComponent<RaycastEntity>();
+        RaycastEntity entity = o.GetComponent<RaycastEntity>();
+        entity.Position = pos;
+        entity.TextureId = 1;
+        world.Entities.Add(entity);
 
         for (int i = 0; i < 32; i++)
             if (!SpawnPlayer(gSystem))
@@ -93,6 +98,28 @@ public class SpawnPointGenerator
         
     }
 
+    public Vector2 GetWithoutOccupy(GridSystem gridSystem, bool removeFromList = false)
+    {
+        int randomNumber = UnityEngine.Random.Range(0, m_randomSpawnPoints.Count - 1);
+
+        Vector2 newPosition = new Vector2(0, 0);
+        while (m_randomSpawnPoints.Count > 0)
+        {
+            newPosition = m_randomSpawnPoints[randomNumber];
+            if (HasSpace(gridSystem, newPosition))
+                break;
+
+            m_randomSpawnPoints.RemoveAt(randomNumber);
+            randomNumber = UnityEngine.Random.Range(0, m_randomSpawnPoints.Count - 1);
+        }
+        if (m_randomSpawnPoints.Count <= 0)
+            return new Vector2(-1, -1);
+
+        if(removeFromList)
+            m_randomSpawnPoints.RemoveAt(randomNumber);
+
+        return newPosition;
+    }
     public Vector2 GetAndOccupyPosRange(GridSystem gridSystem)
     {
         int randomNumber = UnityEngine.Random.Range(0, m_randomSpawnPoints.Count - 1);
