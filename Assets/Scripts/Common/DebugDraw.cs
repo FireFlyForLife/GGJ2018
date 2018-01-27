@@ -8,6 +8,7 @@ public class DebugDraw : MonoBehaviour {
     public static DebugDraw Instance { get; private set; }
 
     public List<CircleShape> Circles = new List<CircleShape>();
+    public List<Rect> Rectangles = new List<Rect>();
 
 	void Start () {
 		if(Instance)
@@ -41,5 +42,20 @@ public class DebugDraw : MonoBehaviour {
     public static void DrawCircle(Vector3 position, float radius)
     {
         Instance.Circles.Add(new CircleShape(position, radius));
+    }
+
+    public static void DrawBox(Rect rect)
+    {
+        Instance.Rectangles.Add(rect);
+    }
+
+    public static void DrawBox(Vector2 pos, Vector2 size)
+    {
+        Instance.Rectangles.Add(new Rect(pos, size));
+    }
+
+    public static void DrawBox(float x, float y, float width, float height)
+    {
+        Instance.Rectangles.Add(new Rect(x, y, width, height));
     }
 }
