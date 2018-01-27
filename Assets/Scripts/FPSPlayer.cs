@@ -4,13 +4,15 @@ using System.Collections.Generic;
 using System.Net;
 using Shapes;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngineInternal;
 using Collision2D = UnityEngine.Collision2D;
 
 public class FPSPlayer : RaycastEntity
 {
     public int PlayerNumber = 0;
-
+    [SerializeField]
+    public Image DistIndicator;
     public float MovementSpeed = 5f;
     public float TurnSpeed = 3f;
 
@@ -65,6 +67,7 @@ public class FPSPlayer : RaycastEntity
         set { Renderer.World = value; }
     }
 
+    public Vector2 DirVec { get { return new Vector2(dirX, dirY); } }
     //private double posX = 22, posY = 12;  //x and y start position
     private float dirX = -1, dirY = 0; //initial direction vector
     private float planeX = 0, planeY = 0.66f; //the 2d raycaster version of camera plane
@@ -82,6 +85,7 @@ public class FPSPlayer : RaycastEntity
     // Use this for initialization
     void Start()
     {
+        DistIndicator.GetComponent<ObjectIndicator>().Initialize(this,DistIndicator,World);
         collider2D = GetComponent<Collider2D>();
         //X = Renderer.posX;
         //Y = Renderer.posY;
