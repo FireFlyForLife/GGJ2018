@@ -8,6 +8,7 @@ public class RaycastResources : MonoBehaviour
     public static RaycastResources Instance;
 
     public Sprite[] SpriteRegistery;
+    public Texture2D[] Textures;
 
     void Start()
     {
