@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum TileType {  empty = -1, floor = 0, wall, door, s01Wall, s02Wall, s03Wall, s04Wall }
+public enum TileType {  empty = -1, floor = 0, wall, door, s01Wall, s02Wall, s03Wall, s04Wall, item
+}
 
 public class GridSystem : GameSystem
 {
