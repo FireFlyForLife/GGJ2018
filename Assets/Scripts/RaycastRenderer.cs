@@ -104,7 +104,7 @@ public class RaycastRenderer : MonoBehaviour
       
         if (posX < 0 || posY < 0)
             Debug.Log(posX + " : " + posY);
-        if (World.worldMap[(int)posY, (int)posX] != 0)
+        if (World.worldMap[(int)posY, (int)posX] > 0)
             throw new Exception("Starting in a wall!!!!");
 
         var Sprites = World.Entities;

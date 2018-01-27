@@ -26,7 +26,7 @@ public class WallGenerator
                     CheckTile(x, y);
                 }
 
-                if (IsEdgePosition(x, y) && m_gridSystem.GetTile(x, y) == TileType.floor)
+                if (IsEdgePosition(x, y) && m_gridSystem.GetTile(x, y).IsWalkable())
                     OccupyWall(x,y);
             }
         }
@@ -39,7 +39,7 @@ public class WallGenerator
         {
             for (int xPlus = x - 1; xPlus <= x + 1; xPlus++)
             {
-                if (m_gridSystem.GetTile(xPlus, yPlus) == TileType.floor)
+                if (m_gridSystem.GetTile(xPlus, yPlus).IsWalkable())
                 {
                     OccupyWall(x, y);
                     return;

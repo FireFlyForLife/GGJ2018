@@ -15,7 +15,7 @@ public class DoorGenerator
         {
             for (int j = 0; j < a_gridSystem.GridSize.Y; j++)
             {
-                if (a_gridSystem.GetTile(i, j) == TileType.floor)
+                if (a_gridSystem.GetTile(i, j).IsWalkable())
                 {
                     if (CheckForWalls(a_gridSystem, i, j) == true)
                     {

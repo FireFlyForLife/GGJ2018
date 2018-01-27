@@ -52,7 +52,9 @@ public class RoomGenerator
 
         // generate walls
         new WallGenerator(m_gridSystem);
-        s = new SpawnPointGenerator(m_gridSystem,world);
+        new DoorGenerator(m_gridSystem);
+        new SectionGenerator(m_gridSystem, TileType.s01Wall, TileType.s02Wall, TileType.s03Wall, TileType.s04Wall);
+        SpawnPointGenerator s = new SpawnPointGenerator(m_gridSystem, world);
         m_playerList = s.SpawnPointList;
     }
 
