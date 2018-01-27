@@ -20,10 +20,12 @@ public class RaycastRenderer : MonoBehaviour
     public int Width = 512;
     public int Height = 384;
 
-    public int texWidth = 64;
-    public int texHeight = 64;
+    public int spriteWidth = 64;
+    public int spriteHeight = 64;
 
-    
+    public int texWidth = 512;
+    public int texHeight = 512;
+
     //public List<SpriteHolder> Sprites;
 
     public RawImage ImageComponent;
@@ -33,6 +35,7 @@ public class RaycastRenderer : MonoBehaviour
     private Texture2D texture;
     private Color32[] blankScreen;
 
+    private Color[] buffer; // y-coordinate first because it works per scanline
     private double[] ZBuffer;
 
     private int[] spriteOrder;
@@ -43,45 +46,46 @@ public class RaycastRenderer : MonoBehaviour
     public float planeX = 0, planeY = 0.66f; //the 2d raycaster version of camera plane
 
 
-    public RectTransform Rect { get { return (RectTransform) transform; } }
-	
-	IEnumerator Start ()
-	{
+    public RectTransform Rect { get { return (RectTransform)transform; } }
+
+    IEnumerator Start()
+    {
         yield return new WaitForEndOfFrame(); //we need to wait a frame so the layout can update our dimensions
-	    Width = (int) Rect.rect.width;
-	    Height = (int) Rect.rect.height;
+        Width = (int)Rect.rect.width;
+        Height = (int)Rect.rect.height;
 
-	    ZBuffer = new double[Width];
+        ZBuffer = new double[Width];
+        buffer = new Color[Height * Width]; // y-coordinate first because it works per scanline
 
-	    spriteOrder = new int[100];
-	    spriteDistance = new double[100];
+        spriteOrder = new int[100];
+        spriteDistance = new double[100];
 
-        blankScreen = new Color32[Width*Height];
-	    for (int i = 0; i < blankScreen.Length; i++)
-	    {
-            if((float)i / Width > Height * 0.5)
-	            blankScreen[i] = new Color32(0, 208, 255, 255);
+        blankScreen = new Color32[Width * Height];
+        for (int i = 0; i < blankScreen.Length; i++)
+        {
+            if ((float)i / Width > Height * 0.5)
+                blankScreen[i] = new Color32(0, 208, 255, 255);
             else
-	            blankScreen[i] = new Color32(220, 220, 220, 255);
-	    }
+                blankScreen[i] = new Color32(220, 220, 220, 255);
+        }
 
-	    texture = new Texture2D(Width, Height, TextureFormat.ARGB32, false);
-	    ImageComponent.texture = texture;
-	}
-	
-	void Update ()
-	{
-	    if (!texture || !gameObject.activeInHierarchy)
-	        return; //Start has not been executed
+        texture = new Texture2D(Width, Height, TextureFormat.ARGB32, false);
+        ImageComponent.texture = texture;
+    }
 
-	    RenderImage();
+    void Update()
+    {
+        if (!texture || !gameObject.activeInHierarchy)
+            return; //Start has not been executed
+
+        RenderImage();
         ClearScreen();
         //HandleInput();
     }
 
     void RenderImage()
     {
-        if(posX < 0 || posY < 0)
+        if (posX < 0 || posY < 0)
             Debug.Log(posX + " : " + posY);
         if (World.worldMap[(int)posX, (int)posY] != 0)
             throw new Exception("Starting in a wall!!!!");
@@ -91,23 +95,23 @@ public class RaycastRenderer : MonoBehaviour
         for (int x = 0; x < Width; x++)
         {
             //calculate ray position and direction
-            double cameraX = 2 * x / (double)Width - 1; //x-coordinate in camera space
-            double rayPosX = posX;
-            double rayPosY = posY;
-            double rayDirX = dirX + planeX * cameraX;
-            double rayDirY = dirY + planeY * cameraX;
+            float cameraX = 2 * x / (float)Width - 1; //x-coordinate in camera space
+            float rayPosX = posX;
+            float rayPosY = posY;
+            float rayDirX = dirX + planeX * cameraX;
+            float rayDirY = dirY + planeY * cameraX;
             //which box of the map we're in
             int mapX = (int)rayPosX;
             int mapY = (int)rayPosY;
 
             //length of ray from current position to next x or y-side
-            double sideDistX;
-            double sideDistY;
+            float sideDistX;
+            float sideDistY;
 
             //length of ray from one x or y-side to next x or y-side
-            double deltaDistX = Math.Sqrt(1 + (rayDirY * rayDirY) / (rayDirX * rayDirX));
-            double deltaDistY = Math.Sqrt(1 + (rayDirX * rayDirX) / (rayDirY * rayDirY));
-            double perpWallDist;
+            float deltaDistX = Mathf.Sqrt(1 + (rayDirY * rayDirY) / (rayDirX * rayDirX));
+            float deltaDistY = Mathf.Sqrt(1 + (rayDirX * rayDirX) / (rayDirY * rayDirY));
+            float perpWallDist;
 
             //what direction to step in x or y-direction (either +1 or -1)
             int stepX;
@@ -124,7 +128,7 @@ public class RaycastRenderer : MonoBehaviour
             else
             {
                 stepX = 1;
-                sideDistX = (mapX + 1.0 - rayPosX) * deltaDistX;
+                sideDistX = (mapX + 1.0f - rayPosX) * deltaDistX;
             }
             if (rayDirY < 0)
             {
@@ -134,7 +138,7 @@ public class RaycastRenderer : MonoBehaviour
             else
             {
                 stepY = 1;
-                sideDistY = (mapY + 1.0 - rayPosY) * deltaDistY;
+                sideDistY = (mapY + 1.0f - rayPosY) * deltaDistY;
             }
             //perform DDA
             while (hit == 0)
@@ -168,27 +172,59 @@ public class RaycastRenderer : MonoBehaviour
             int drawEnd = lineHeight / 2 + Height / 2;
             if (drawEnd >= Height) drawEnd = Height - 1;
 
-            //choose wall color
-            Color color;
-            switch (World.worldMap[mapX, mapY])
+            int texNum = World.worldMap[mapX, mapY] - 1;
+
+            //calculate value of wallX
+            float wallX; //where exactly the wall was hit
+            if (side == 0) wallX = posY + perpWallDist * rayDirY;
+            else wallX = posX + perpWallDist * rayDirX;
+            wallX -= Mathf.Floor(wallX);
+
+            //x coordinate on the texture
+            int texX = Mathf.RoundToInt(wallX * texWidth * 8);
+            if (side == 0 && rayDirX > 0) texX = texWidth - texX - 1;
+            if (side == 1 && rayDirY < 0) texX = texWidth - texX - 1;
+
+            ////choose wall color
+            //Color color;
+            //switch (World.worldMap[mapX, mapY])
+            //{
+            //    case 1: color = Color.red; break; //red
+            //    case 2: color = Color.green; break; //green
+            //    case 3: color = Color.blue; break; //blue
+            //    case 4: color = Color.white; break; //white
+            //    default: color = Color.yellow; break; //yellow
+            //}
+
+            for (int y = drawStart; y < drawEnd; y++)
             {
-                case 1: color = Color.red; break; //red
-                case 2: color = Color.green; break; //green
-                case 3: color = Color.blue; break; //blue
-                case 4: color = Color.white; break; //white
-                default: color = Color.yellow; break; //yellow
+                int d = y * 256 * 8 - Height * 128 * 8 + lineHeight * 128 * 8;  //256 and 128 factors to avoid floats
+
+                int texY = ((d * texHeight) / lineHeight) / 256;
+                Color color = RaycastResources.Instance.Textures[texNum].GetPixel(texX, texY);
+                if (side == 1)
+                {
+                    color = color / 2f;
+                    color.a = 1;
+                }
+                //buffer[y * texHeight + x] = color;//TODO: fix
+                texture.SetPixel(x, y, color);
             }
 
             //give x and y sides different brightness
-            if (side == 1) { color = color / 2; color.a = 1; }
+            //if (side == 1) { color = color / 2; color.a = 1; }
 
             //draw the pixels of the stripe as a vertical line
-            texture.DrawLine(x, drawStart, x, drawEnd, color);
+            //texture.DrawLine(x, drawStart, x, drawEnd, color);
             //verLine(x, drawStart, drawEnd, color);
 
             //SET THE ZBUFFER FOR THE SPRITE CASTING
             ZBuffer[x] = perpWallDist;
         }
+
+        //texture.SetPixels(buffer);
+        //for (int x = 0; x < Width; x++) for (int y = 0; y < Height; y++) buffer[y][x] = 0; //clear the buffer instead of cls()
+        //buffer = new Color[Width* Height];
 
         //SPRITE CASTING
         //sort sprites from far to close
@@ -207,7 +243,7 @@ public class RaycastRenderer : MonoBehaviour
             double spriteX = Sprites[spriteOrder[i]].X - posX;
             double spriteY = Sprites[spriteOrder[i]].Y - posY;
 
-            if(Math.Abs(spriteX) < 0.0001 && Math.Abs(spriteY) < 0.0001) //We are standing right ontop of the sprite
+            if (Math.Abs(spriteX) < 0.0001 && Math.Abs(spriteY) < 0.0001) //We are standing right ontop of the sprite
                 continue;
 
             //transform sprite with the inverse camera matrix
@@ -237,7 +273,7 @@ public class RaycastRenderer : MonoBehaviour
             try
             {
                 spriteHeight =
-                    Math.Abs((int) (Height / (transformY))) /
+                    Math.Abs((int)(Height / (transformY))) /
                     vDiv; //using "transformY" instead of the real distance prevents fisheye
             }
             catch (Exception ex)
@@ -261,7 +297,7 @@ public class RaycastRenderer : MonoBehaviour
             //loop through every vertical stripe of the sprite on screen
             for (int stripe = drawStartX; stripe < drawEndX; stripe++)
             {
-                int texX = (int)(256 * (stripe - (-spriteWidth / 2 + spriteScreenX)) * texWidth / spriteWidth) / 256;
+                int texX = (int)(256 * (stripe - (-spriteWidth / 2 + spriteScreenX)) * this.texWidth / spriteWidth) / 256;
                 //the conditions in the if are:
                 //1) it's in front of camera plane so you don't see things behind you
                 //2) it's on the screen (left)
@@ -271,13 +307,13 @@ public class RaycastRenderer : MonoBehaviour
                     for (int y = drawStartY; y < drawEndY; y++) //for every pixel of the current stripe
                     {
                         int d = (y - vMoveScreen) * 256 - Height * 128 + spriteHeight * 128; //256 and 128 factors to avoid floats
-                        int texY = ((d * texHeight) / spriteHeight) / 256;
-                        // texWidth * texY + texX]; //get current color from the texture
-                        
+                        int texY = ((d * this.texHeight) / spriteHeight) / 256;
+                        // spriteWidth * texY + texX]; //get current color from the texture
+
                         Color color = RaycastResources.Instance.SpriteRegistery[Sprites[spriteOrder[i]].TextureId].texture.GetPixel(texX, texY);
 
                         //if ((color & 0x00FFFFFF) != 0) buffer[y, stripe] = color; //paint pixel if it isn't black, black is the invisible color
-                        if(Math.Abs(color.a - 1) < 0.1f)
+                        if (Math.Abs(color.a - 1) < 0.1f)
                             texture.SetPixel(stripe, y, color);
                     }
             }
@@ -291,7 +327,7 @@ public class RaycastRenderer : MonoBehaviour
         texture.SetPixels32(blankScreen);
     }
 
-    
+
 
     void comboSort(int[] order, double[] dist, int amount)
     {
