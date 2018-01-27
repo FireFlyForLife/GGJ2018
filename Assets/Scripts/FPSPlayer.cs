@@ -19,8 +19,9 @@ public class FPSPlayer : RaycastEntity
     private int health = 100;
     public float HitShowTime = 0.3f;
     private float lastHitTime = float.MinValue;
-    private Vector2 spawnPos;
-    public  Vector2 SpawnPos { get { return spawnPos; } set { spawnPos = value; } }
+    private List<Vector2> spawnPos = new List<Vector2>();
+    private int spawnIndex = 0;
+    public List<Vector2> SpawnPos { get { return spawnPos; } set { spawnPos = value; } }
 
     public int Health
     {
@@ -32,9 +33,11 @@ public class FPSPlayer : RaycastEntity
 
             if (Health <= 0)
             {
-                SetPosition(spawnPos);
+                // never spawn at the same position twice
+                SetPosition(spawnPos[spawnIndex]);
+                spawnIndex = ++spawnIndex % spawnPos.Count;
             }
-                enabled = false;
+            //enabled = false;
         }
     }
 
@@ -45,7 +48,7 @@ public class FPSPlayer : RaycastEntity
 
     public Color GetColor()
     {
-        if (lastHitTime + HitShowTime > Time.time )
+        if (lastHitTime + HitShowTime > Time.time)
             return Color.red;
 
         if (PlayerNumber < 2)
@@ -76,27 +79,28 @@ public class FPSPlayer : RaycastEntity
     }
 
     // Use this for initialization
-    void Start ()
-	{
-	    collider2D = GetComponent<Collider2D>();
-	    //X = Renderer.posX;
-	    //Y = Renderer.posY;
-	    dirX = Renderer.dirX;
-	    dirY = Renderer.dirY;
-	    planeX = Renderer.planeX;
-	    planeY = Renderer.planeY;
+    void Start()
+    {
+        collider2D = GetComponent<Collider2D>();
+        //X = Renderer.posX;
+        //Y = Renderer.posY;
+        dirX = Renderer.dirX;
+        dirY = Renderer.dirY;
+        planeX = Renderer.planeX;
+        planeY = Renderer.planeY;
 
-	    TextureId = 0;
-	    World.Entities.Add(this);
+        TextureId = 0;
+        World.Entities.Add(this);
 
-	    IsPlayer = true;
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		HandleInput();
-	    UpdateRendererPosition();
-	}
+        IsPlayer = true;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        HandleInput();
+        UpdateRendererPosition();
+    }
 
     void HandleInput()
     {
@@ -143,38 +147,38 @@ public class FPSPlayer : RaycastEntity
         if (Input.GetButtonDown("Player" + PlayerNumber + "_Fire"))
         {
             Vector2 start = new Vector2(X, Y);
-            LineSegment line = new LineSegment(start, start + new Vector2(dirX, dirY)*ShotRange); //TODO: Get direction
+            LineSegment line = new LineSegment(start, start + new Vector2(dirX, dirY) * ShotRange); //TODO: Get direction
 
-            Vector2 dir = new Vector2(dirX, dirY)*ShotRange;
+            Vector2 dir = new Vector2(dirX, dirY) * ShotRange;
             ContactFilter2D filter = new ContactFilter2D();
             RaycastHit2D[] hits = new RaycastHit2D[20];
-          
-         
-           
+
+
+
             Vector2 hitVector = new Vector2();
             if (GridSystem.IntersectsElement(start, dir, World, Renderer.Rect.rect.width, out hitVector) == true)
             {
-               
+
                 int amount = Physics2D.Raycast(line.Start, dir, filter, hits, (hitVector - line.Start).magnitude);
                 if (amount > 0)
                 {
-                   
 
-                        for (var i = 0; i < amount; i++)
+
+                    for (var i = 0; i < amount; i++)
+                    {
+                        var hit = hits[i];
+                        if (hit.collider == collider2D)
+                            continue;
+
+                        Debug.Log("Shot someone!!!");
+                        var player = hit.collider.GetComponent<FPSPlayer>();
+                        if (player)
                         {
-                            var hit = hits[i];
-                            if (hit.collider == collider2D)
-                                continue;
-
-                            Debug.Log("Shot someone!!!");
-                            var player = hit.collider.GetComponent<FPSPlayer>();
-                            if (player)
-                            {
-                                player.Health -= 100;
-                            }
+                            player.Health -= 100;
                         }
-                   
-                   
+                    }
+
+
                 }
                 else
                     return;
