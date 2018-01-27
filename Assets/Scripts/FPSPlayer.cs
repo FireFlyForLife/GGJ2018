@@ -19,6 +19,9 @@ public class FPSPlayer : RaycastEntity
     private int health = 100;
     public float HitShowTime = 0.3f;
     private float lastHitTime = float.MinValue;
+    private Vector2 spawnPos;
+    public  Vector2 SetSpawnPos { get { return spawnPos; } set { spawnPos = value; } }
+
     public int Health
     {
         get { return health; }
@@ -27,8 +30,11 @@ public class FPSPlayer : RaycastEntity
             health = value;
             lastHitTime = Time.time;
 
-            //if (Health <= 0)
-            //    enabled = false;
+            if (Health <= 0)
+            {
+                SetPosition(spawnPos);
+            }
+                enabled = false;
         }
     }
 
@@ -61,7 +67,7 @@ public class FPSPlayer : RaycastEntity
 
     private Collider2D collider2D;
 
-    public void SetPosition(GridSystem gSystem, Vector2 v)
+    public void SetPosition(Vector2 v)
     {
         Renderer.posX = v.x;
         Renderer.posY = v.y;
