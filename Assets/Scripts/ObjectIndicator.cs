@@ -69,7 +69,7 @@ public class ObjectIndicator : MonoBehaviour
        /* var recttr = m_ownImg.rectTransform;
         recttr.localEulerAngles = new Vector3(0, 0, GetAngle(m_closest.Position));*/
 
-        Debug.Log(m_ownImg.transform.rotation.z);
+        //Debug.Log(m_ownImg.transform.rotation.z);
         return bestDist;
     }
 
