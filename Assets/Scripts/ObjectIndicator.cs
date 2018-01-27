@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Net;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ObjectIndicator : MonoBehaviour {
+public class ObjectIndicator : MonoBehaviour
+{
 
     private int PlayerNumber;
     private Vector2 m_objectPosition = new Vector2();
@@ -11,95 +13,93 @@ public class ObjectIndicator : MonoBehaviour {
     List<int> playerXPosList = new List<int>();
     List<int> playerYPosList = new List<int>();
 
-    private Vector2 m_playerVec = new Vector2();
+    private Image m_ownImg;
+    private FPSPlayer m_ownEntity;
+    private RaycastEntity m_closest;
+    private World2D m_world;
+    private float timer;
 
-    // Use this for initialization
-    void Start()
+    public void Initialize(FPSPlayer entity, Image image, World2D world)
     {
-        //ccd  m_playerPosition = m_gameManager.RoomGenerator.SpawnPointGenerator.SpawnPointList[PlayerNumber];
-        m_objectPosition = new Vector2(0, 0);
-     //    this.GetComponent<Image>().enabled = true;
-
-    }
-// Update is called once per frame
-void Update () {
-        //Debug.Log(m_playerPosition);
-        CheckDistance();
+        m_ownImg = entity.DistIndicator;
+        m_ownEntity = entity;
+        m_world = world;
     }
 
-    int counter = 0;
-    private void CheckDistance()
+    public float GetAngle(Vector3 closest)
     {
-        // this.enabled = false;
-        //Debug.Log("BUGGER");
-        //Debug.Log((m_objectPosition - m_playerVec).sqrMagnitude); //TODO: is this needed?
+        /*;
+        targetDir.Normalize();
+        float dot = Vector3.Dot(dirVec,targetDir);
+        return Mathf.Rad2Deg * Mathf.Acos(dot);*/
+        //Vector3 dirVec = new Vector3(m_ownEntity.DirVec.x, m_ownEntity.DirVec.y, 0);
+        //Vector3 ownPos = new Vector3(m_ownEntity.Position.x, m_ownEntity.Position.y, 0);
+        //Vector3 targetDir = ownPos - closest;
+        //targetDir.Normalize();
+        //dirVec.Normalize();
+        //float dot = Vector3.Dot(dirVec, targetDir);
+        //return Mathf.Rad2Deg * Mathf.Acos(dot);
+        Vector3 posDir = m_ownEntity.Position;// + m_ownEntity.DirVec;
+        Vector2 relDir = closest - posDir;
+        relDir.Normalize();
+      //  float rad = Mathf.Atan2(relDir.y, relDir.x);
+        float dot = Vector3.Dot(m_ownEntity.DirVec, new Vector3(relDir.x, relDir.y, 0));
+        float det = m_ownEntity.DirVec.x * relDir.y - m_ownEntity.DirVec.y * relDir.x;
+        float angle = Mathf.Atan2(det, dot);
+        Debug.Log(Mathf.Rad2Deg * angle);
+       
+        return Mathf.Rad2Deg * angle;
+    }
 
-      
-
-        if ((m_objectPosition - m_playerVec).sqrMagnitude < 4000)
+    public float GetClosestSqrDist()
+    {
+        float bestDist = float.MaxValue;
+        for (int i = 0; i < m_world.Entities.Count; i++)
+        {
+            float dist = (m_world.Entities[i].Position - m_ownEntity.Position).sqrMagnitude;
+            if (dist < bestDist)
             {
-            //this.enabled = true;
-            //GetComponent<Image>();
-            //Debug.Log("OEEEEEHh");
-
-            Component test = GetComponent<Image>();// = false;
-
-            counter = 0;
-            //counter++;
-            if (counter == 0)
-            {
-                GetComponent<Image>().enabled = false;
-                counter++;
-            }
-            if(counter == 1)
-            {
-                GetComponent<Image>().enabled = true;
-                counter = 0;
+                if (dist == 0) continue;
+                bestDist = dist;
+                m_closest = m_world.Entities[i];
             }
         }
-        //else
-            //this.GetComponent<Image>().enabled = true;
 
+        m_ownImg.transform.SetPositionAndRotation(m_ownImg.transform.position, Quaternion.Euler(0, 0, GetAngle(m_closest.Position))); //= Quaternion.Euler(0, 0, GetAngle(m_closest.Position));
+       /* var recttr = m_ownImg.rectTransform;
+        recttr.localEulerAngles = new Vector3(0, 0, GetAngle(m_closest.Position));*/
 
+        Debug.Log(m_ownImg.transform.rotation.z);
+        return bestDist;
     }
 
-    public Vector2 GetPositions(int posX, int posY, int Index)
+    public float GetTime()
     {
+        float dist = GetClosestSqrDist();
+        return dist / 100.0f;
+    }
 
-        PlayerNumber = Index;
-        //   Debug.Log(a_playerList[4].x);
-        if (playerXPosList.Count < 4 && playerYPosList.Count < 4)
+    // Update is called once per frame
+    void Update()
+    {
+        if (m_ownEntity == null)
         {
-            playerXPosList.Add(posX);
-            playerYPosList.Add(posY);
+            Debug.Log("OBJECT INDICATOR INITIALIZE NOT CALLED");
+            return;
+        }
 
-           
+
+        if (timer <= 0)
+        {
+            m_ownImg.enabled = !m_ownImg.isActiveAndEnabled;
+            timer = GetTime();
         }
         else
         {
-
-            m_playerVec = new Vector2();
-            //int temp = PlayerNumber;
-            m_playerVec = new Vector2(playerXPosList[PlayerNumber], playerYPosList[PlayerNumber]);
-
-            //Debug.Log(tempVec);
-
-
-            playerXPosList.RemoveRange(0, 4);
-            playerYPosList.RemoveRange(0, 4);
-            playerXPosList.Add(posX);
-            playerYPosList.Add(posY);
+            timer -= Time.deltaTime;
+            timer = Mathf.Min(timer, GetTime());
+            if (timer > 5) m_ownImg.enabled = true;
         }
 
-
-        
-      
-
-        return new Vector2();
-    }
-
-    public void ShowPosition()
-    {
-        Debug.Log(playerXPosList[0]);
     }
 }

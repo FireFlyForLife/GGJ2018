@@ -87,13 +87,6 @@ public class RaycastRenderer : MonoBehaviour
 
         RenderImage();
 
-        //-----------------------------UI----------------------------------------///
-
-        GameObject.Find("Indicator1").GetComponent<ObjectIndicator>().GetPositions((int)posX, (int)posY, 0);
-        GameObject.Find("Indicator2").GetComponent<ObjectIndicator>().GetPositions((int)posX, (int)posY, 1);
-        GameObject.Find("Indicator3").GetComponent<ObjectIndicator>().GetPositions((int)posX, (int)posY, 2);
-        GameObject.Find("Indicator4").GetComponent<ObjectIndicator>().GetPositions((int)posX, (int)posY, 3);
-
         ClearScreen();
         //HandleInput();
     }
