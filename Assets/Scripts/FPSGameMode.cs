@@ -41,8 +41,15 @@ public class FPSGameMode : MonoBehaviour
 
     void Update ()
     {
+        RaycastEntity oldent = null;
         foreach (var entity in world.Entities)
         {
+            if (oldent != null)
+            {
+                Debug.DrawLine(entity.Position, oldent.Position, Color.red, 0.1f);
+            }
+            oldent = entity;
+
             if (entity.Properties.Contains("ItemA"))
             {
                 if ((entity.Position - entity.Position).sqrMagnitude < 50)

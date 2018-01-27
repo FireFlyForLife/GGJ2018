@@ -102,14 +102,14 @@ public class FPSPlayer : RaycastEntity
 
         if (vert > 0) //up
         {
-            if (World.worldMap[(int)(X + dirX * moveSpeed), (int)(Y)] == 0) X += dirX * moveSpeed;
-            if (World.worldMap[(int)(X), (int)(Y + dirY * moveSpeed)] == 0) Y += dirY * moveSpeed;
+            if (World.worldMap[(int)(Y), (int)(X + dirX * moveSpeed)] == 0) X += dirX * moveSpeed;
+            if (World.worldMap[(int)(Y + dirY * moveSpeed), (int)(X)] == 0) Y += dirY * moveSpeed;
         }
         //move backwards if no wall behind you
         if (vert < 0) //down
         {
-            if (World.worldMap[(int)(X - dirX * moveSpeed), (int)(Y)] == 0) X -= dirX * moveSpeed;
-            if (World.worldMap[(int)(X), (int)(Y - dirY * moveSpeed)] == 0) Y -= dirY * moveSpeed;
+            if (World.worldMap[(int)(Y), (int)(X - dirX * moveSpeed)] == 0) X -= dirX * moveSpeed;
+            if (World.worldMap[(int)(Y - dirY * moveSpeed), (int)(X)] == 0) Y -= dirY * moveSpeed;
         }
         //rotate to the right
         if (hori > 0) //right
