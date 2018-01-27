@@ -6,6 +6,8 @@ using UnityEngine;
 public class FPSGameMode : MonoBehaviour
 {
     private World2D world;
+    private RaycastEntity targetEntity;
+    private RaycastEntity objectiveEntity;
 
 	void Start ()
 	{
@@ -13,10 +15,13 @@ public class FPSGameMode : MonoBehaviour
 
 	    RoomGenerator generator = new RoomGenerator();
 	    generator.GetGridSystem.SetGridSize(new IntVector2(10, 10));
-	    //generator.GenerateRooms();
-        
+        //generator.GenerateRooms();
 
-	    //world.worldMap = LinqConvert(generator.GetGridSystem.GetGrid);
+
+        //world.worldMap = LinqConvert(generator.GetGridSystem.GetGrid);
+
+        //get the target and objective entities
+	    //targetEntity = generator
 	    
 	}
 
@@ -29,7 +34,16 @@ public class FPSGameMode : MonoBehaviour
     }
 
     void Update ()
-	{
-		
-	}
+    {
+        foreach (var entity in world.Entities)
+        {
+            if (entity.Properties.Contains("ItemA"))
+            {
+                if ((entity.Position - entity.Position).sqrMagnitude < 50)
+                {
+
+                }
+            }
+        }
+    }
 }

@@ -6,6 +6,8 @@ public class RaycastEntity : MonoBehaviour
 {
     public bool IsPlayer = false;
 
+    public List<string> Properties = new List<string>();
+
     public float X
     {
         set
@@ -27,5 +29,12 @@ public class RaycastEntity : MonoBehaviour
         }
         get { return transform.position.y; }
     }
+
+    public Vector2 Position
+    {
+        get { return transform.position; }
+        set { transform.position = value; }
+    }
+
     public int TextureId;
 }
