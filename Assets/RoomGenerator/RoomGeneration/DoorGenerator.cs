@@ -20,8 +20,8 @@ public class DoorGenerator
                     if (CheckForWalls(a_gridSystem, i, j) == true)
                     {
                         a_gridSystem.SetOccupied(i, j, TileType.door);
-                        GameObject tile = GameObject.Instantiate(Resources.Load<GameObject>("DoorQuad"));
-                        tile.transform.position = new Vector2(i, j);
+                        //GameObject tile = GameObject.Instantiate(Resources.Load<GameObject>("DoorQuad"));
+                        //tile.transform.position = new Vector2(i, j);
                     }
                 }
             }
