@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Net;
 using Shapes;
 using UnityEngine;
 using UnityEngineInternal;
@@ -47,7 +48,6 @@ public class FPSPlayer : RaycastEntity
 	void Update () {
 		HandleInput();
 	    UpdateRendererPosition();
-
 	}
 
     void HandleInput()
@@ -100,8 +100,34 @@ public class FPSPlayer : RaycastEntity
             Vector2 dir = new Vector2(dirX, dirY)*ShotRange;
             ContactFilter2D filter = new ContactFilter2D();
             RaycastHit2D[] hits = new RaycastHit2D[20];
-            int amount = Physics2D.Raycast(line.Start, dir, filter, hits);
-            if (amount > 0)
+          
+         
+           
+            Vector2 hitVector = new Vector2();
+            if (GridSystem.IntersectsElement(start, dir, World, renderer.Rect.rect.width, out hitVector) == true)
+            {
+               
+                int amount = Physics2D.Raycast(line.Start, dir, filter, hits, (hitVector - line.Start).magnitude);
+                if (amount > 0)
+                {
+                   
+
+                        for (var i = 0; i < amount; i++)
+                        {
+                            var hit = hits[i];
+                            if (hit.collider != collider2D)
+                            {
+                                Debug.Log("Shot someone!!!");
+                            }
+                        }
+                   
+                   
+                }
+                else
+                    return;
+            }
+
+           /* if (amount > 0)
             {
                 for (var i = 0; i < amount; i++)
                 {
@@ -111,7 +137,7 @@ public class FPSPlayer : RaycastEntity
                         Debug.Log("Shot someone!!!");
                     }
                 }
-            }
+            }*/
         }
     }
 

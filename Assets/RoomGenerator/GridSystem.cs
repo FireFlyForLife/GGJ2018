@@ -88,40 +88,126 @@ public class GridSystem : GameSystem
         //
     }
 
-    static bool IntersectsElement(Vector2 origin, Vector2 dir, IntVector2 tile)
+    public static bool IntersectsElement(Vector2 origin, Vector2 dir, World2D World, double CameraWidth, out Vector2 hitValue/*, IntVector2 tile, ref float distance*/)
     {
-        Vector2 bMin = new Vector2(tile.X - .5f, tile.Y - .5f);
-        Vector2 bMax = new Vector2(tile.X + .5f, tile.Y + .5f);
+        //Debug.Log(dir);
+        float PlaneX = 0, PlaneY = 0.66f;
+    //calculate ray position and direction
+        double cameraX = 2 * origin.x / (double)CameraWidth - 1; //x-coordinate in camera space
+        double rayPosX = origin.x;
+        double rayPosY = origin.y;
+        double rayDirX = dir.x + PlaneX * cameraX;
+        double rayDirY = dir.y + PlaneY * cameraX;
 
-        float tMin = (bMin.x - origin.x) / dir.x;
-        float tmax = (bMax.x - origin.x) / dir.x;
+        //which box of the map we're in
+        int mapX = (int)rayPosX;
+        int mapY = (int)rayPosY;
 
-        if (tMin > tmax)
+        //length of ray from current position to next x or y-side
+        double sideDistX;
+        double sideDistY;
+
+        //length of ray from one x or y-side to next x or y-side
+        double deltaDistX = Math.Sqrt(1 + (rayDirY * rayDirY) / (rayDirX * rayDirX));
+        double deltaDistY = Math.Sqrt(1 + (rayDirX * rayDirX) / (rayDirY * rayDirY));
+        //double perpWallDist;
+
+        //what direction to step in x or y-direction (either +1 or -1)
+        int stepX;
+        int stepY;
+
+        int hit = 0; //was there a wall hit?
+        int side = -1; //was a NS or a EW wall hit?
+                       //calculate step and initial sideDist
+        if (rayDirX < 0)
         {
-            float t = tMin;
-            tMin = tmax;
-            tmax = t;
+            stepX = -1;
+            sideDistX = (rayPosX - mapX) * deltaDistX;
+        }
+        else
+        {
+            stepX = 1;
+            sideDistX = (mapX + 1.0 - rayPosX) * deltaDistX;
+        }
+        if (rayDirY < 0)
+        {
+            stepY = -1;
+            sideDistY = (rayPosY - mapY) * deltaDistY;
+        }
+        else
+        {
+            stepY = 1;
+            sideDistY = (mapY + 1.0 - rayPosY) * deltaDistY;
+        }
+        //perform DDA
+        while (hit == 0)
+        {
+            //jump to next map square, OR in x-direction, OR in y-direction
+            if (sideDistX < sideDistY)
+            {
+                sideDistX += deltaDistX;
+                mapX += stepX;
+                side = 0;
+            }
+            else
+            {
+                sideDistY += deltaDistY;
+                mapY += stepY;
+                side = 1;
+            }
+            //Check if ray has hit a wall
+            if (World.worldMap[mapX, mapY] > 0)
+            {
+                hit = 1;
+            }
+        }
+        hitValue = new Vector2(0, 0);
+
+        if (hit == 1)
+        {
+            //-----------------INSERTLOGIC HERE---------------------------/////////////
+            hitValue = new Vector2(mapX, mapY);
+            Debug.Log("You hit the wall");
+            return true;
+          
         }
 
-        float tyMin = (bMin.y - origin.y) / dir.y;
-        float tyMax = (bMax.y - origin.y) / dir.y;
+        /*   Vector2 bMin = new Vector2(tile.X - .5f, tile.Y - .5f);
+           Vector2 bMax = new Vector2(tile.X + .5f, tile.Y + .5f);
 
-        if (tyMin > tyMax)
-        {
-            float t = tyMin;
-            tyMin = tyMax;
-            tyMax = t;
-        }
+           float tMin = (bMin.x - origin.x) / dir.x;
+           float tmax = (bMax.x - origin.x) / dir.x;
 
-        if ((tMin > tyMax) || (tyMin > tmax))
-            return false;
+           if (tMin > tmax)
+           {
+               float t = tMin;
+               tMin = tmax;
+               tmax = t;
+           }
 
-        if (tyMin > tMin)
-            tMin = tyMin;
+           float tyMin = (bMin.y - origin.y) / dir.y;
+           float tyMax = (bMax.y - origin.y) / dir.y;
 
-        if (tyMax < tmax)
-            tmax = tyMax;
+           if (tyMin > tyMax)
+           {
+               float t = tyMin;
+               tyMin = tyMax;
+               tyMax = t;
+           }
 
-        return true;
+           if ((tMin > tyMax) || (tyMin > tmax))
+               return false;
+
+           if (tyMin > tMin)
+               tMin = tyMin;
+
+           if (tyMax < tmax)
+               tmax = tyMax;
+
+           if (tMin < distance)
+               return true;
+
+           return false;*/
+        return false;
     }
 }
