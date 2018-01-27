@@ -20,6 +20,8 @@ public class RoomGenerator
     private GridSystem m_gridSystem;
     private List<Vector2> m_playerList = new List<Vector2>();
     public List<Vector2> SpawnPointList { get { return m_playerList; } }
+    private SpawnPointGenerator s;
+    public SpawnPointGenerator SpawnPointGenerator { get { return s; } }
 
     public GridSystem GetGridSystem { get { return m_gridSystem; } }
 
@@ -50,7 +52,7 @@ public class RoomGenerator
 
         // generate walls
         new WallGenerator(m_gridSystem);
-        SpawnPointGenerator s = new SpawnPointGenerator(m_gridSystem);
+        s = new SpawnPointGenerator(m_gridSystem);
         m_playerList = s.SpawnPointList;
     }
 

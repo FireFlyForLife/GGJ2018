@@ -38,7 +38,7 @@ public class SpawnPointGenerator {
             //tempObject.transform.position = newPlayer;
 
             m_playerList.Add(newPlayer);
-            Debug.Log(m_randomSpawnPoints.Count);
+           // Debug.Log(m_randomSpawnPoints.Count);
 
             return true;
         }
