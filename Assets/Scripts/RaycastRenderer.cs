@@ -88,7 +88,7 @@ public class RaycastRenderer : MonoBehaviour
     {
         if (posX < 0 || posY < 0)
             Debug.Log(posX + " : " + posY);
-        if (World.worldMap[(int)posX, (int)posY] != 0)
+        if (World.worldMap[(int)posY, (int)posX] != 0)
             throw new Exception("Starting in a wall!!!!");
 
         var Sprites = World.Entities;
@@ -158,7 +158,7 @@ public class RaycastRenderer : MonoBehaviour
                     side = 1;
                 }
                 //Check if ray has hit a wall
-                if (World.worldMap[mapX, mapY] > 0) hit = 1;
+                if (World.worldMap[mapY, mapX] > 0) hit = 1;
             }
             //Calculate distance projected on camera direction (oblique distance will give fisheye effect!)
             if (side == 0) perpWallDist = (mapX - rayPosX + (1 - stepX) / 2) / rayDirX;
@@ -173,7 +173,7 @@ public class RaycastRenderer : MonoBehaviour
             int drawEnd = lineHeight / 2 + Height / 2;
             if (drawEnd >= Height) drawEnd = Height - 1;
 
-            int texNum = World.worldMap[mapX, mapY] - 1;
+            int texNum = World.worldMap[mapY, mapX] - 1;
 
             //calculate value of wallX
             float wallX; //where exactly the wall was hit

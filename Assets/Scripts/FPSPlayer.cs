@@ -61,12 +61,20 @@ public class FPSPlayer : RaycastEntity
 
     private Collider2D collider2D;
 
+    public void SetPosition(GridSystem gSystem, Vector2 v)
+    {
+        Renderer.posX = v.x;
+        Renderer.posY = v.y;
+        X = v.x;
+        Y = v.y;
+    }
+
     // Use this for initialization
     void Start ()
 	{
 	    collider2D = GetComponent<Collider2D>();
-	    X = Renderer.posX;
-	    Y = Renderer.posY;
+	    //X = Renderer.posX;
+	    //Y = Renderer.posY;
 	    dirX = Renderer.dirX;
 	    dirY = Renderer.dirY;
 	    planeX = Renderer.planeX;
