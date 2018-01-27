@@ -104,6 +104,8 @@ public class SpawnPointGenerator
     // return if the tile has floor tiles around it
     private bool HasSpace(GridSystem gSystem, Vector2 newPosition)
     {
+        return true;
+
         for (int x = -2; x <= 2; x++)
         {
             for (int y = -2; y <= 2; y++)

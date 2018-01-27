@@ -1,20 +1,22 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Net;
 using Shapes;
 using UnityEngine;
-using UnityEngineInternal;
-using Collision2D = UnityEngine.Collision2D;
+using UnityEngine.UI;
 
 public class FPSPlayer : RaycastEntity
 {
+    public Image SplashEffect;
     public int PlayerNumber = 0;
 
     public float MovementSpeed = 5f;
     public float TurnSpeed = 3f;
 
     public float ShotRange = 10f;
+    private float lastFireTime = float.MinValue;
+    public float SplashDuration = 0.2f;
+    public int DamagePerShot = 50;
+    public AudioClip[] ShotSounds;
 
     private int health = 100;
     public float HitShowTime = 0.3f;
@@ -22,6 +24,15 @@ public class FPSPlayer : RaycastEntity
     private List<Vector2> spawnPos = new List<Vector2>();
     private int spawnIndex = 0;
     public List<Vector2> SpawnPos { get { return spawnPos; } set { spawnPos = value; } }
+
+    //Animation
+    public int[] SpriteIds;
+    private float lastUpdate = 0;
+    public float FrameUpdateDelay = 0.25f;
+    [SerializeField]
+    private int textureIndex = 0;
+
+    private AudioSource audioSource;
 
     public int Health
     {
@@ -52,10 +63,13 @@ public class FPSPlayer : RaycastEntity
         if (lastHitTime + HitShowTime > Time.time)
             return Color.red;
 
+        return Color.white;
+
         if (PlayerNumber < 2)
             return Color.blue;
         else
             return Color.green;
+
     }
 
     public RaycastRenderer Renderer;
@@ -94,6 +108,10 @@ public class FPSPlayer : RaycastEntity
         World.Entities.Add(this);
 
         IsPlayer = true;
+
+        audioSource = gameObject.AddComponent<AudioSource>();
+
+        TextureId = PlayerNumber;
     }
 
     // Update is called once per frame
@@ -101,6 +119,24 @@ public class FPSPlayer : RaycastEntity
     {
         HandleInput();
         UpdateRendererPosition();
+        UpdateEffects();
+    }
+
+    private void UpdateEffects()
+    {
+        bool b = lastFireTime + SplashDuration > Time.time;
+        SplashEffect.enabled = b;
+
+        if (lastUpdate + FrameUpdateDelay < Time.time)
+        {
+            lastUpdate = Time.time;
+            if (textureIndex == SpriteIds.Length - 1)
+                textureIndex = 0;
+            else
+                ++textureIndex;
+
+            TextureId = SpriteIds[textureIndex];
+        }
     }
 
     void HandleInput()
@@ -147,8 +183,12 @@ public class FPSPlayer : RaycastEntity
 
         if (Input.GetButtonDown("Player" + PlayerNumber + "_Fire"))
         {
+            lastFireTime = Time.time;
+            int clipnum = UnityEngine.Random.Range(0, ShotSounds.Length - 1);
+            audioSource.PlayOneShot(ShotSounds[clipnum]);
+
             Vector2 start = new Vector2(X, Y);
-            LineSegment line = new LineSegment(start, start + new Vector2(dirX, dirY) * ShotRange); //TODO: Get direction
+            LineSegment line = new LineSegment(start, start + new Vector2(dirX, dirY) * ShotRange);
 
             Vector2 dir = new Vector2(dirX, dirY) * ShotRange;
             ContactFilter2D filter = new ContactFilter2D();
@@ -175,11 +215,9 @@ public class FPSPlayer : RaycastEntity
                         var player = hit.collider.GetComponent<FPSPlayer>();
                         if (player)
                         {
-                            player.Health -= 100;
+                            player.Health -= DamagePerShot;
                         }
                     }
-
-
                 }
                 else
                     return;

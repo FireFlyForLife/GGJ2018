@@ -82,8 +82,14 @@ public class GridSystem : GameSystem
         List<IntVector2> tiles = new List<IntVector2>();
 
         IntVector2 intpos = new IntVector2((int)pos.x, (int)pos.y);
-        IntVector2 min = new IntVector2((int)(intpos.X - radius), (int)(intpos.Y - radius));
-        IntVector2 max = new IntVector2((int)(intpos.X + radius), (int)(intpos.Y + radius));
+        IntVector2 min = new IntVector2(
+            Math.Max((int)(intpos.X - radius), 0),
+            Math.Max((int)(intpos.Y - radius), 0)
+            );
+        IntVector2 max = new IntVector2(
+            Math.Min((int)(intpos.X + radius), GridSize.X), 
+            Math.Min((int)(intpos.Y + radius), GridSize.Y)
+            );
 
         for (int x = min.X; x < max.X; x++)
         {

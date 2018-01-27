@@ -113,6 +113,74 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &5913470
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 5913471}
+  - component: {fileID: 5913473}
+  - component: {fileID: 5913472}
+  m_Layer: 5
+  m_Name: Watersplash
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &5913471
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 5913470}
+  m_LocalRotation: {x: -0, y: -0, z: -0.14435618, w: 0.98952585}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 182812041}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 37.4, y: -7.05}
+  m_SizeDelta: {x: 92.1, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &5913472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 5913470}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 21300000, guid: b4c23eb38a3587d4983df7a39f25d843, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &5913473
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 5913470}
 --- !u!1 &64719177
 GameObject:
   m_ObjectHideFlags: 0
@@ -180,6 +248,74 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 64719177}
+--- !u!1 &76653221
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 76653222}
+  - component: {fileID: 76653224}
+  - component: {fileID: 76653223}
+  m_Layer: 5
+  m_Name: Watersplash
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &76653222
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 76653221}
+  m_LocalRotation: {x: -0, y: -0, z: -0.14435618, w: 0.98952585}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 606083842}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 37.4, y: -7.05}
+  m_SizeDelta: {x: 92.1, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &76653223
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 76653221}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 21300000, guid: b4c23eb38a3587d4983df7a39f25d843, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &76653224
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 76653221}
 --- !u!1 &97065810
 GameObject:
   m_ObjectHideFlags: 0
@@ -327,6 +463,8 @@ RectTransform:
   m_Children:
   - {fileID: 1135112846}
   - {fileID: 1524982146}
+  - {fileID: 5913471}
+  - {fileID: 1104199504}
   m_Father: {fileID: 1518430062}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -592,8 +730,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -304, y: -184}
-  m_SizeDelta: {x: 295.3, y: 155.79999}
+  m_AnchoredPosition: {x: -305.277, y: -186.95}
+  m_SizeDelta: {x: 296.58, y: 158.75}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &273158024
 MonoBehaviour:
@@ -627,6 +765,74 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 273158022}
+--- !u!1 &300787630
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 300787631}
+  - component: {fileID: 300787633}
+  - component: {fileID: 300787632}
+  m_Layer: 5
+  m_Name: WaterGun
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &300787631
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 300787630}
+  m_LocalRotation: {x: 0, y: 0, z: -0.14435618, w: 0.98952585}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1675670497}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -16.6}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 94.5, y: -46.1}
+  m_SizeDelta: {x: 116.53, y: 70}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &300787632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 300787630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 21300000, guid: cb512c7887d75d647b802be1f1157bde, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &300787633
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 300787630}
 --- !u!1 &307506684
 GameObject:
   m_ObjectHideFlags: 0
@@ -760,6 +966,74 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b6b1ab0c136cab449770120403127d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &487773630
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 487773631}
+  - component: {fileID: 487773633}
+  - component: {fileID: 487773632}
+  m_Layer: 5
+  m_Name: Watersplash
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &487773631
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 487773630}
+  m_LocalRotation: {x: -0, y: -0, z: -0.14435618, w: 0.98952585}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1675670497}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 37.4, y: -7.05}
+  m_SizeDelta: {x: 92.1, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &487773632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 487773630}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 21300000, guid: b4c23eb38a3587d4983df7a39f25d843, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &487773633
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 487773630}
 --- !u!1 &588738334
 GameObject:
   m_ObjectHideFlags: 0
@@ -856,6 +1130,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 954622132}
+  - {fileID: 76653222}
+  - {fileID: 1371509303}
   m_Father: {fileID: 273158023}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1252,11 +1528,21 @@ MonoBehaviour:
   IsPlayer: 0
   Properties: []
   TextureId: 0
+  SplashEffect: {fileID: 5913472}
   PlayerNumber: 0
   MovementSpeed: 5
   TurnSpeed: 3
   ShotRange: 10
+  SplashDuration: 0.2
+  DamagePerShot: 50
+  ShotSounds:
+  - {fileID: 8300000, guid: 1174970463c8db64a856d7655d093cbc, type: 3}
+  - {fileID: 8300000, guid: fc79e5e612081c8418bfd440027919e0, type: 3}
+  - {fileID: 8300000, guid: b468674baec53bf48bf20aae0b0b746d, type: 3}
   HitShowTime: 0.3
+  SpriteIds: 0000000004000000
+  FrameUpdateDelay: 0.12
+  textureIndex: 0
   Renderer: {fileID: 182812042}
 --- !u!1 &709113558
 GameObject:
@@ -1587,12 +1873,90 @@ MonoBehaviour:
   IsPlayer: 0
   Properties: []
   TextureId: 0
+  SplashEffect: {fileID: 925776092}
   PlayerNumber: 1
   MovementSpeed: 5
   TurnSpeed: 3
   ShotRange: 10
+  SplashDuration: 0.2
+  DamagePerShot: 50
+  ShotSounds:
+  - {fileID: 8300000, guid: 1174970463c8db64a856d7655d093cbc, type: 3}
+  - {fileID: 8300000, guid: fc79e5e612081c8418bfd440027919e0, type: 3}
+  - {fileID: 8300000, guid: b468674baec53bf48bf20aae0b0b746d, type: 3}
   HitShowTime: 0.3
+  SpriteIds: 0100000005000000
+  FrameUpdateDelay: 0.12
+  textureIndex: 0
   Renderer: {fileID: 1985069534}
+--- !u!1 &925776090
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 925776091}
+  - component: {fileID: 925776093}
+  - component: {fileID: 925776092}
+  m_Layer: 5
+  m_Name: Watersplash
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &925776091
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 925776090}
+  m_LocalRotation: {x: -0, y: -0, z: -0.14435618, w: 0.98952585}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1985069533}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 37.4, y: -7.05}
+  m_SizeDelta: {x: 92.1, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &925776092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 925776090}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 21300000, guid: b4c23eb38a3587d4983df7a39f25d843, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &925776093
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 925776090}
 --- !u!1 &954622131
 GameObject:
   m_ObjectHideFlags: 0
@@ -1791,12 +2155,90 @@ MonoBehaviour:
   IsPlayer: 0
   Properties: []
   TextureId: 0
+  SplashEffect: {fileID: 487773632}
   PlayerNumber: 3
   MovementSpeed: 5
   TurnSpeed: 3
   ShotRange: 10
+  SplashDuration: 0.2
+  DamagePerShot: 50
+  ShotSounds:
+  - {fileID: 8300000, guid: 1174970463c8db64a856d7655d093cbc, type: 3}
+  - {fileID: 8300000, guid: fc79e5e612081c8418bfd440027919e0, type: 3}
+  - {fileID: 8300000, guid: b468674baec53bf48bf20aae0b0b746d, type: 3}
   HitShowTime: 0.3
+  SpriteIds: 0300000007000000
+  FrameUpdateDelay: 0.12
+  textureIndex: 0
   Renderer: {fileID: 1675670498}
+--- !u!1 &1104199503
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1104199504}
+  - component: {fileID: 1104199506}
+  - component: {fileID: 1104199505}
+  m_Layer: 5
+  m_Name: WaterGun
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1104199504
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1104199503}
+  m_LocalRotation: {x: 0, y: 0, z: -0.14435618, w: 0.98952585}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 182812041}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -16.6}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 94.5, y: -46.1}
+  m_SizeDelta: {x: 116.53, y: 70}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1104199505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1104199503}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 21300000, guid: cb512c7887d75d647b802be1f1157bde, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &1104199506
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1104199503}
 --- !u!1 &1135112845
 GameObject:
   m_ObjectHideFlags: 0
@@ -1941,8 +2383,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SpriteRegistery:
-  - {fileID: 21300000, guid: a01723e8e7a10c34ba7cb08ea6fb9f3f, type: 3}
-  - {fileID: 21300000, guid: a01723e8e7a10c34ba7cb08ea6fb9f3f, type: 3}
+  - {fileID: 21300000, guid: 9155e0ae628bff740b9d60a4c4956acf, type: 3}
+  - {fileID: 21300000, guid: de6ced3c2e101274aafd011637991e2a, type: 3}
+  - {fileID: 21300000, guid: af013946ebfa9fa4699bbcc924a7267d, type: 3}
+  - {fileID: 21300000, guid: 727998424db1b0847bcc77c91ec0a84d, type: 3}
+  - {fileID: 21300000, guid: 26c9a6c2b21bc544aa1db80b622fa6ab, type: 3}
+  - {fileID: 21300000, guid: d59c37f9de2f2314cb688e9b5a597b06, type: 3}
+  - {fileID: 21300000, guid: 7172d94087f7b6542a88662e8744f936, type: 3}
+  - {fileID: 21300000, guid: 93a86ea89e4078440a42ffd8367ea55e, type: 3}
   Textures:
   - {fileID: 2800000, guid: 56440740257e36244a3d8bb98d1e9b45, type: 3}
   - {fileID: 2800000, guid: 61d3b979ad27bce4dbc8568bfa20ad30, type: 3}
@@ -1956,6 +2404,74 @@ MonoBehaviour:
   - {fileID: 2800000, guid: acde64f638745b143add128175e1297d, type: 3}
   - {fileID: 2800000, guid: acde64f638745b143add128175e1297d, type: 3}
   - {fileID: 2800000, guid: acde64f638745b143add128175e1297d, type: 3}
+--- !u!1 &1371509302
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1371509303}
+  - component: {fileID: 1371509305}
+  - component: {fileID: 1371509304}
+  m_Layer: 5
+  m_Name: WaterGun
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1371509303
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1371509302}
+  m_LocalRotation: {x: 0, y: 0, z: -0.14435618, w: 0.98952585}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 606083842}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -16.6}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 94.5, y: -46.1}
+  m_SizeDelta: {x: 116.53, y: 70}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1371509304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1371509302}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 21300000, guid: cb512c7887d75d647b802be1f1157bde, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &1371509305
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1371509302}
 --- !u!1 &1414168536
 GameObject:
   m_ObjectHideFlags: 0
@@ -2410,6 +2926,8 @@ RectTransform:
   m_Children:
   - {fileID: 145774486}
   - {fileID: 97065811}
+  - {fileID: 487773631}
+  - {fileID: 300787631}
   m_Father: {fileID: 1922385080}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2609,6 +3127,74 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1849086509}
+--- !u!1 &1860717168
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1860717169}
+  - component: {fileID: 1860717171}
+  - component: {fileID: 1860717170}
+  m_Layer: 5
+  m_Name: WaterGun
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1860717169
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1860717168}
+  m_LocalRotation: {x: 0, y: 0, z: -0.14435618, w: 0.98952585}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1985069533}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -16.6}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 94.5, y: -46.1}
+  m_SizeDelta: {x: 116.53, y: 70}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1860717170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1860717168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 21300000, guid: cb512c7887d75d647b802be1f1157bde, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &1860717171
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1860717168}
 --- !u!1 &1922385079
 GameObject:
   m_ObjectHideFlags: 0
@@ -2642,8 +3228,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 8.600006, y: -184}
-  m_SizeDelta: {x: 296, y: 155.79999}
+  m_AnchoredPosition: {x: 8.600006, y: -186.95}
+  m_SizeDelta: {x: 296, y: 158.75}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1922385081
 MonoBehaviour:
@@ -2800,6 +3386,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 999745571}
+  - {fileID: 925776091}
+  - {fileID: 1860717169}
   m_Father: {fileID: 775521118}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2924,11 +3512,21 @@ MonoBehaviour:
   IsPlayer: 0
   Properties: []
   TextureId: 0
+  SplashEffect: {fileID: 76653223}
   PlayerNumber: 2
   MovementSpeed: 5
   TurnSpeed: 3
   ShotRange: 10
+  SplashDuration: 0.2
+  DamagePerShot: 50
+  ShotSounds:
+  - {fileID: 8300000, guid: 1174970463c8db64a856d7655d093cbc, type: 3}
+  - {fileID: 8300000, guid: fc79e5e612081c8418bfd440027919e0, type: 3}
+  - {fileID: 8300000, guid: b468674baec53bf48bf20aae0b0b746d, type: 3}
   HitShowTime: 0.3
+  SpriteIds: 0200000006000000
+  FrameUpdateDelay: 0.12
+  textureIndex: 0
   Renderer: {fileID: 606083843}
 --- !u!1 &2124886059
 GameObject:

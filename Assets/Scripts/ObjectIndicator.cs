@@ -32,7 +32,7 @@ void Update () {
     {
         // this.enabled = false;
         //Debug.Log("BUGGER");
-        Debug.Log((m_objectPosition - m_playerVec).sqrMagnitude);
+        //Debug.Log((m_objectPosition - m_playerVec).sqrMagnitude); //TODO: is this needed?
 
       
 
@@ -40,7 +40,7 @@ void Update () {
             {
             //this.enabled = true;
             //GetComponent<Image>();
-            Debug.Log("OEEEEEHh");
+            //Debug.Log("OEEEEEHh");
 
             Component test = GetComponent<Image>();// = false;
 
