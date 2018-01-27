@@ -65,11 +65,8 @@ public class GridSystem : GameSystem
     public TileType GetTile(int x, int y)
     {
         if (!IsWithinGrid(x, y)) return TileType.empty;
-<<<<<<< HEAD
-        else return (TileType)m_grid[y][x];
-=======
+
         return (TileType)m_grid[y][x];
->>>>>>> 5718283daf545579da3ad944c0bbf70d1f69ec9c
     }
 
     public IntVector2 GetCenter()
@@ -95,11 +92,8 @@ public class GridSystem : GameSystem
     {
         //Debug.Log(dir);
         float PlaneX = 0, PlaneY = 0.66f;
-<<<<<<< HEAD
-    //calculate ray position and direction
-=======
+
         //calculate ray position and direction
->>>>>>> 5718283daf545579da3ad944c0bbf70d1f69ec9c
         double cameraX = 2 * origin.x / (double)CameraWidth - 1; //x-coordinate in camera space
         double rayPosX = origin.x;
         double rayPosY = origin.y;
