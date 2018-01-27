@@ -36,6 +36,8 @@ public class GridSystem : GameSystem
         for (int i = 0; i < a_size.Y; i++)
         {
             m_grid[i] = new int[a_size.X];
+            for (int j = 0; j < a_size.X; j++)
+                m_grid[i][j] = -1;
         }
         m_gridSize = a_size;
     }
