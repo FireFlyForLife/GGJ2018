@@ -84,6 +84,7 @@ public class World2D : MonoBehaviour
                             {
                                 player.Score += 10;
                                 player.pickup.Position = spawnpointGenerator.GetWithoutOccupyRange(gridSystem);
+                                player.pickup.enabled = true;
                                 player.pickup = null;
                             }
                         }
@@ -92,6 +93,7 @@ public class World2D : MonoBehaviour
                 else
                 {
                     RaycastEntity pickup = Entities[i];
+                    if(!pickup.enabled) continue;
                     for (int j = 0; j < Entities.Count; j++)
                     {
                         if (j == i || !Entities[j].IsPlayer) continue;

@@ -36,7 +36,7 @@ public class SpawnPointGenerator
         //gSystem.SetOccupied((int)pos.x, (int)pos.y, TileType.item);
 
 
-        for (int i = 0; i < 32; i++)
+        for (int i = 0; i < 8; i++)
             if (!SpawnPlayer(gSystem))
                 return;
     }

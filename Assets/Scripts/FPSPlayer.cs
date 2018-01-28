@@ -73,6 +73,7 @@ public class FPSPlayer : RaycastEntity
                 {
                     pickup.Position = Position;
                     pickup.enabled = true;
+                    this.pickup = null;
                 }
                 var prefab = Resources.Load<GameObject>("ExplosionPrefab");
                 GameObject explosionObject = GameObject.Instantiate(prefab, transform.position, Quaternion.identity);
@@ -80,8 +81,8 @@ public class FPSPlayer : RaycastEntity
                 explosion.World = World;
 
                 // never spawn at the same position twice
-                SetPosition(spawnPos[spawnIndex]);
                 spawnIndex = ++spawnIndex % spawnPos.Count;
+                SetPosition(spawnPos[spawnIndex]);
                 health = 100;
             }
         }
@@ -211,7 +212,6 @@ public class FPSPlayer : RaycastEntity
         {
             if (World.worldMap[(int)(Y), (int)(X + dirX * moveSpeed)] <= 0) X += dirX * moveSpeed;
             if (World.worldMap[(int)(Y + dirY * moveSpeed), (int)(X)] <= 0) Y += dirY * moveSpeed;
-            Debug.Log(transform.position);
         }
         //move backwards if no wall behind you
         if (vert < 0) //down
