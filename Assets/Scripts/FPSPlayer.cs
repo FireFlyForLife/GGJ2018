@@ -6,6 +6,9 @@ using UnityEngine.UI;
 
 public class FPSPlayer : RaycastEntity
 {
+    [SerializeField]
+    GameObject winScreen;
+    private const int maxScore = 30;
     private int m_score;
 
     public int Score
@@ -15,6 +18,12 @@ public class FPSPlayer : RaycastEntity
         {
             m_score = value;
             scoreText.text = "Score: " + m_score;
+            if (m_score >= maxScore)
+            {
+                GameObject.FindObjectOfType<FPSGameMode>().IsOpened = false;
+                winScreen.SetActive(true);
+            }
+
         }
     }
     public Image SplashEffect;
