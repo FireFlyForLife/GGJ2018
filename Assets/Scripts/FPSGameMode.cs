@@ -13,7 +13,7 @@ public class FPSGameMode : MonoBehaviour
     private RoomGenerator generator;
     private GameLoader loader;
     private bool m_isOpened;
-    public bool IsOpened { get { return m_isOpened; } set { m_isOpened = value; } }
+    public bool IsOpened { get { return m_isOpened; } set { m_isOpened = value; if (value) GetComponent<AudioSource>().Play(); } }
 
     private List<IntVector2> openDoors = new List<IntVector2>();
 

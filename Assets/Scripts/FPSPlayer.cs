@@ -6,10 +6,23 @@ using UnityEngine.UI;
 
 public class FPSPlayer : RaycastEntity
 {
+    private int m_score;
+
+    public int Score
+    {
+        get { return m_score; }
+        set
+        {
+            m_score = value;
+            scoreText.text = "Score: " + m_score;
+        }
+    }
     public Image SplashEffect;
     public int PlayerNumber = 0;
     [SerializeField]
     public Image DistIndicator;
+    [SerializeField]
+    private Text scoreText;
     public float MovementSpeed = 5f;
     public float TurnSpeed = 3f;
 
@@ -36,6 +49,15 @@ public class FPSPlayer : RaycastEntity
     private AudioSource audioSource;
 
     public GameObject SplashHitObject;
+    public RaycastEntity pickup;
+
+    public void Hit(int dmg, FPSPlayer player)
+    {
+        int v = Health - dmg;
+        if (v <= 0)
+            player.Score += 1;
+        Health = v;
+    }
 
     public int Health
     {
@@ -47,6 +69,11 @@ public class FPSPlayer : RaycastEntity
 
             if (Health <= 0)
             {
+                if (pickup != null)
+                {
+                    pickup.Position = Position;
+                    pickup.enabled = true;
+                }
                 var prefab = Resources.Load<GameObject>("ExplosionPrefab");
                 GameObject explosionObject = GameObject.Instantiate(prefab, transform.position, Quaternion.identity);
                 var explosion = explosionObject.GetComponent<ParticleEntity>();
@@ -104,6 +131,7 @@ public class FPSPlayer : RaycastEntity
     // Use this for initialization
     void Start()
     {
+        Score = 0;
         DistIndicator.GetComponent<ObjectIndicator>().Initialize(this, DistIndicator, World);
         collider2D = GetComponent<Collider2D>();
         //X = Renderer.posX;
@@ -253,6 +281,7 @@ public class FPSPlayer : RaycastEntity
                         {
                             player.Health -= DamagePerShot;
                             player.Health -= 100;
+                            player.Hit(100,this);
                             player.Pointsystem.GotShot();
                         }
                     }
@@ -271,5 +300,9 @@ public class FPSPlayer : RaycastEntity
         Renderer.dirY = dirY;
         Renderer.planeX = planeX;
         Renderer.planeY = planeY;
+        if (pickup != null)
+        {
+            pickup.Position = new Vector2(X, Y);
+        }
     }
 }

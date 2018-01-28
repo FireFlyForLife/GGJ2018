@@ -58,5 +58,52 @@ public class World2D : MonoBehaviour
         {1,1,1,1,1,1,1,1,1,1,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
         {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
     };
+
+    public SpawnPointGenerator spawnpointGenerator;
+    public GridSystem gridSystem;
+
     #endregion
+
+    void Update()
+    {
+        for (int i = 0; i < Entities.Count; i++)
+        {
+            if (!Entities[i].IsPlayer)
+            {
+                if (Entities[i].tag == "EndPoint")
+                {
+                    RaycastEntity endPoint = Entities[i];
+                    for (int j = 0; j < Entities.Count; j++)
+                    {
+                        if(i == j) continue;
+                        if (Entities[j].IsPlayer && ((FPSPlayer) Entities[j]).pickup != null)
+                        {
+                            FPSPlayer player = ((FPSPlayer) Entities[j]);
+                            float dist = (endPoint.Position - Entities[j].Position).magnitude;
+                            if (dist < 1)
+                            {
+                                player.Score += 10;
+                                player.pickup.Position = spawnpointGenerator.GetWithoutOccupyRange(gridSystem);
+                                player.pickup = null;
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    RaycastEntity pickup = Entities[i];
+                    for (int j = 0; j < Entities.Count; j++)
+                    {
+                        if (j == i || !Entities[j].IsPlayer) continue;
+                        float dist = (pickup.Position - Entities[j].Position).magnitude;
+                        if (dist < 1)
+                        {
+                            pickup.enabled = false;
+                            ((FPSPlayer) Entities[j]).pickup = pickup;
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

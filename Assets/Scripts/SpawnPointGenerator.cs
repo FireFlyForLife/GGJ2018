@@ -16,15 +16,25 @@ public class SpawnPointGenerator
     {
         m_randomSpawnPoints = GetEmptyTiles(gSystem);
 
-        Vector2 pos = GetWithoutOccupyRange(gSystem,true);
+        Vector2 pos = GetWithoutOccupyRange(gSystem);
         GameObject o = new GameObject();
         o.AddComponent<RaycastEntity>();
         RaycastEntity entity = o.GetComponent<RaycastEntity>();
-        entity.TextureId = 11;
+        entity.Position = pos;
+        entity.TextureId = 5;
         world.Entities.Add(entity);
+
+        GameObject o2 = new GameObject();
+        o2.AddComponent<RaycastEntity>();
+        Vector2 pos2 = GetAndOccupyPosRange(gSystem);
+        RaycastEntity endPoint = o2.GetComponent<RaycastEntity>();
+        endPoint.Position = pos2;
+        endPoint.TextureId = 6;
+        endPoint.tag = "EndPoint";
+        world.Entities.Add(endPoint);
+
         //gSystem.SetOccupied((int)pos.x, (int)pos.y, TileType.item);
 
-        Debug.Log(pos);
 
         for (int i = 0; i < 32; i++)
             if (!SpawnPlayer(gSystem))
@@ -94,7 +104,7 @@ public class SpawnPointGenerator
             /*  float a = m_randomSpawnPoints[i].y - newPosition.y;
               float b = Math.Abs(m_randomSpawnPoints[i].x - newPosition.x);*/
 
-            if ((m_randomSpawnPoints[i] - newPosition).sqrMagnitude <= 150)//Math.Abs(m_randomSpawnPoints[i].x - newPosition.x) <= 10 || Math.Abs(m_randomSpawnPoints[i].y - newPosition.y) <=   10)
+            if ((m_randomSpawnPoints[i] - newPosition).sqrMagnitude <= 75)//Math.Abs(m_randomSpawnPoints[i].x - newPosition.x) <= 10 || Math.Abs(m_randomSpawnPoints[i].y - newPosition.y) <=   10)
             {
                 m_randomSpawnPoints.RemoveAt(i);
             }
@@ -106,6 +116,7 @@ public class SpawnPointGenerator
     // return if the tile has floor tiles around it
     private bool HasSpace(GridSystem gSystem, Vector2 newPosition)
     {
+        return true;
         for (int x = -2; x <= 2; x++)
         {
             for (int y = -2; y <= 2; y++)

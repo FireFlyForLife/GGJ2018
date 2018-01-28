@@ -42,8 +42,8 @@ public class GameLoader
         if (m_phase == 0)
             ShowWindows();
 
-        else return true;
-        return false;
+        else return false;
+        return true;
     }
 
     private void ShowWindows()
