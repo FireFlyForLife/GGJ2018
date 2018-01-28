@@ -12,6 +12,8 @@ public class FPSGameMode : MonoBehaviour
     private RaycastEntity objectiveEntity = new RaycastEntity();
     private RoomGenerator generator;
     private GameLoader loader;
+    private bool m_isOpened;
+    public bool IsOpened { get { return m_isOpened; } set { m_isOpened = value; } }
 
     private List<IntVector2> openDoors = new List<IntVector2>();
 
@@ -53,6 +55,9 @@ public class FPSGameMode : MonoBehaviour
 
     void Update ()
     {
+        if (!IsOpened)
+            return;
+
         if(loader.ShouldUpdate())
             return;
 
