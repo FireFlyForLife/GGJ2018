@@ -39,6 +39,8 @@ public class FPSPlayer : RaycastEntity
     private int spawnIndex = 0;
     public List<Vector2> SpawnPos { get { return spawnPos; } set { spawnPos = value; } }
 
+    public Image KeyIcon;
+
     //Animation
     public int[] SpriteIds;
     private float lastUpdate = 0;
@@ -197,6 +199,8 @@ public class FPSPlayer : RaycastEntity
                 TextureId = SpriteIds[textureIndex];
             }
         }
+
+        KeyIcon.enabled = pickup != null;
     }
 
 

@@ -326,6 +326,7 @@ public class RaycastRenderer : MonoBehaviour
             if (drawEndY >= Height) drawEndY = Height - 1;
 
             //calculate width of the sprite
+            int HeightDivTransformY = Math.Abs(transformY) < 0.001 ? 0 : (int) (Height / (transformY));
             int spriteWidth = Math.Abs((int)(Height / (transformY))) / uDiv;
             int drawStartX = -spriteWidth / 2 + spriteScreenX;
             if (drawStartX < 0) drawStartX = 0;
