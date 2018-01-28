@@ -263,7 +263,7 @@ public class RaycastRenderer : MonoBehaviour
         int activeSprites = 0;
         for (int i = 0; i < Sprites.Count; i++)
         {
-            if ((!Sprites[i].IsPlayer && Sprites[i].enabled) || Sprites[i].IsPlayer && ((FPSPlayer)Sprites[i]).IsAlive)
+            if ((!Sprites[i].IsPlayer && Sprites[i].enabled) || (Sprites[i].IsPlayer && ((FPSPlayer)Sprites[i]).IsAlive))
             {
                 ++activeSprites;
                 spriteOrder[i] = i;

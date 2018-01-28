@@ -21,7 +21,7 @@ public class SpawnPointGenerator
         o.AddComponent<RaycastEntity>();
         RaycastEntity entity = o.GetComponent<RaycastEntity>();
         entity.Position = pos;
-        entity.TextureId = 5;
+        entity.TextureId = 18;
         world.Entities.Add(entity);
 
         GameObject o2 = new GameObject();
@@ -29,7 +29,7 @@ public class SpawnPointGenerator
         Vector2 pos2 = GetAndOccupyPosRange(gSystem);
         RaycastEntity endPoint = o2.GetComponent<RaycastEntity>();
         endPoint.Position = pos2;
-        endPoint.TextureId = 6;
+        endPoint.TextureId = 17;
         endPoint.tag = "EndPoint";
         world.Entities.Add(endPoint);
 
