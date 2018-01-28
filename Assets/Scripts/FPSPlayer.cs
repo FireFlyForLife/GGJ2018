@@ -35,6 +35,8 @@ public class FPSPlayer : RaycastEntity
 
     private AudioSource audioSource;
 
+    public GameObject SplashHitObject;
+
     public int Health
     {
         get { return health; }
@@ -45,12 +47,16 @@ public class FPSPlayer : RaycastEntity
 
             if (Health <= 0)
             {
+                var prefab = Resources.Load<GameObject>("ExplosionPrefab");
+                GameObject explosionObject = GameObject.Instantiate(prefab, transform.position, Quaternion.identity);
+                var explosion = explosionObject.GetComponent<ParticleEntity>();
+                explosion.World = World;
+
                 // never spawn at the same position twice
                 SetPosition(spawnPos[spawnIndex]);
                 spawnIndex = ++spawnIndex % spawnPos.Count;
                 health = 100;
             }
-            //enabled = false;
         }
     }
 
@@ -66,10 +72,10 @@ public class FPSPlayer : RaycastEntity
 
         return Color.white;
 
-        if (PlayerNumber < 2)
-            return Color.blue;
-        else
-            return Color.green;
+        //if (PlayerNumber < 2)
+        //    return Color.blue;
+        //else
+        //    return Color.green;
 
     }
 
@@ -85,7 +91,7 @@ public class FPSPlayer : RaycastEntity
     private float dirX = -1, dirY = 0; //initial direction vector
     private float planeX = 0, planeY = 0.66f; //the 2d raycaster version of camera plane
 
-    private Collider2D collider2D;
+    private new Collider2D collider2D;
 
     public void SetPosition(Vector2 v)
     {
@@ -129,6 +135,21 @@ public class FPSPlayer : RaycastEntity
     {
         bool b = lastFireTime + SplashDuration > Time.time;
         SplashEffect.enabled = b;
+
+        if (SplashHitObject)
+        {
+            foreach (Transform childTransform in SplashHitObject.transform)
+            {
+                var img = childTransform.GetComponent<Image>();
+                if (img)
+                {
+                    const float hitDeteriation = 1.5f;
+                    var c = img.color;
+                    c.a = Math.Max(0, lastHitTime + hitDeteriation - Time.time);
+                    img.color = c;
+                }
+            }
+        }
 
         if (lastUpdate + FrameUpdateDelay < Time.time)
         {
