@@ -5,10 +5,13 @@ using UnityEngine;
 
 public class FPSGameMode : MonoBehaviour
 {
+    [SerializeField]
+    private List<GameObject> windows;
     private World2D world;
     private RaycastEntity targetEntity;
     private RaycastEntity objectiveEntity;
     private RoomGenerator generator;
+    private GameLoader loader;
 
     private List<IntVector2> openDoors = new List<IntVector2>();
 
@@ -23,6 +26,7 @@ public class FPSGameMode : MonoBehaviour
 
         world.worldMap = LinqConvert(generator.GetGridSystem.GetGrid);
 	    GameObject[] o =  GameObject.FindGameObjectsWithTag("Player");
+	    loader = new GameLoader(windows);
         List<FPSPlayer> players = new List<FPSPlayer>();
 	    for (int i = 0; i < o.Length; i++)
 	        players.Add(o[i].GetComponent<FPSPlayer>());
@@ -48,6 +52,9 @@ public class FPSGameMode : MonoBehaviour
 
     void Update ()
     {
+        if(loader.ShouldUpdate())
+            return;
+
         RaycastEntity oldent = null;
         foreach (var entity in world.Entities)
         {
