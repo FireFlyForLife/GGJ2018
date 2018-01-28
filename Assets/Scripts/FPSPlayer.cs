@@ -8,7 +8,7 @@ public class FPSPlayer : RaycastEntity
 {
     [SerializeField]
     GameObject winScreen;
-    private const int maxScore = 30;
+    private const int maxScore = 1;
     private int m_score;
 
     public int Score
@@ -16,7 +16,7 @@ public class FPSPlayer : RaycastEntity
         get { return m_score; }
         set
         {
-            m_score = value;
+            m_score += value;
             scoreText.text = "Score: " + m_score;
             if (m_score >= maxScore)
             {

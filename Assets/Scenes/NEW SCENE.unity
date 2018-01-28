@@ -2675,7 +2675,7 @@ MonoBehaviour:
   IsPlayer: 0
   Properties: []
   TextureId: 0
-  winScreen: {fileID: 0}
+  winScreen: {fileID: 374120733}
   SplashEffect: {fileID: 5913472}
   PlayerNumber: 0
   DistIndicator: {fileID: 1524982148}
@@ -3532,7 +3532,7 @@ MonoBehaviour:
   IsPlayer: 0
   Properties: []
   TextureId: 0
-  winScreen: {fileID: 0}
+  winScreen: {fileID: 1617399382}
   SplashEffect: {fileID: 5913472}
   PlayerNumber: 1
   DistIndicator: {fileID: 307506687}
@@ -4003,7 +4003,7 @@ MonoBehaviour:
   IsPlayer: 0
   Properties: []
   TextureId: 0
-  winScreen: {fileID: 0}
+  winScreen: {fileID: 1824745753}
   SplashEffect: {fileID: 487773632}
   PlayerNumber: 3
   DistIndicator: {fileID: 97065813}
@@ -6861,7 +6861,7 @@ MonoBehaviour:
   IsPlayer: 0
   Properties: []
   TextureId: 0
-  winScreen: {fileID: 0}
+  winScreen: {fileID: 535476877}
   SplashEffect: {fileID: 76653223}
   PlayerNumber: 2
   DistIndicator: {fileID: 1414168539}
