@@ -41,18 +41,10 @@ public class GameLoader
     {
         if (m_phase == 0)
             ShowWindows();
-        else if(m_phase == 1)
-            LoadGames();
-
-        if (m_phase > 1)
+        else
             return false;
 
         return true;
-    }
-
-    private void LoadGames()
-    {
-
     }
 
     private void ShowWindows()
