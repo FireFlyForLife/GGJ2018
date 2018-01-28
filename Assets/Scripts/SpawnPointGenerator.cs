@@ -20,9 +20,11 @@ public class SpawnPointGenerator
         GameObject o = new GameObject();
         o.AddComponent<RaycastEntity>();
         RaycastEntity entity = o.GetComponent<RaycastEntity>();
+        entity.TextureId = 8;
         world.Entities.Add(entity);
         //gSystem.SetOccupied((int)pos.x, (int)pos.y, TileType.item);
 
+        Debug.Log(pos);
 
         for (int i = 0; i < 32; i++)
             if (!SpawnPlayer(gSystem))
