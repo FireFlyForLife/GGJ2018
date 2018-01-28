@@ -283,9 +283,8 @@ public class FPSPlayer : RaycastEntity
                         var player = hit.collider.GetComponent<FPSPlayer>();
                         if (player)
                         {
-                            player.Health -= DamagePerShot;
-                            player.Health -= 100;
-                            player.Hit(100,this);
+                            //player.Health -= DamagePerShot;
+                            player.Hit(DamagePerShot, this);
                             player.Pointsystem.GotShot();
                         }
                     }

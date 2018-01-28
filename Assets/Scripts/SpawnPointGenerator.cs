@@ -22,6 +22,7 @@ public class SpawnPointGenerator
         RaycastEntity entity = o.GetComponent<RaycastEntity>();
         entity.Position = pos;
         entity.TextureId = 18;
+        entity.tag = "Pickup";
         world.Entities.Add(entity);
 
         GameObject o2 = new GameObject();

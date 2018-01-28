@@ -524,6 +524,7 @@ MonoBehaviour:
   - {fileID: 114899036892731930}
   - {fileID: 114022626352916226}
   - {fileID: 114833977575397288}
+  clickSound: {fileID: 8300000, guid: 1268f7c30b419674c90c6c4d5b473384, type: 3}
 --- !u!114 &114682730836526402
 MonoBehaviour:
   m_ObjectHideFlags: 1

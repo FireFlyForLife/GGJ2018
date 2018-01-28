@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Window
   - EndPoint
+  - Pickup
   layers:
   - Default
   - TransparentFX

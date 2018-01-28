@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class World2D : MonoBehaviour
 {
+    [SerializeField] private AudioClip keyCollectedSound;
+    //May not be used
+    [SerializeField] private AudioClip keyDeliveredSound;
+    private AudioSource audioSource;
     public List<RaycastEntity> Entities;
     #region WorldMap
     public int MapWidth { get { return worldMap.GetLength(0); } }
@@ -64,6 +68,11 @@ public class World2D : MonoBehaviour
 
     #endregion
 
+    void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
+
     void Update()
     {
         for (int i = 0; i < Entities.Count; i++)
@@ -86,11 +95,13 @@ public class World2D : MonoBehaviour
                                 player.pickup.Position = spawnpointGenerator.GetWithoutOccupyRange(gridSystem);
                                 player.pickup.enabled = true;
                                 player.pickup = null;
+
+                                if(keyDeliveredSound) audioSource.PlayOneShot(keyDeliveredSound);
                             }
                         }
                     }
                 }
-                else
+                else if(Entities[i].tag == "Pickup")
                 {
                     RaycastEntity pickup = Entities[i];
                     if(!pickup.enabled) continue;
@@ -102,6 +113,7 @@ public class World2D : MonoBehaviour
                         {
                             pickup.enabled = false;
                             ((FPSPlayer) Entities[j]).pickup = pickup;
+                            if(keyCollectedSound) audioSource.PlayOneShot(keyCollectedSound);
                         }
                     }
                 }
