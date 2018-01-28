@@ -46,7 +46,6 @@ public class ObjectIndicator : MonoBehaviour
         float dot = Vector3.Dot(m_ownEntity.DirVec, new Vector3(relDir.x, relDir.y, 0));
         float det = m_ownEntity.DirVec.x * relDir.y - m_ownEntity.DirVec.y * relDir.x;
         float angle = Mathf.Atan2(det, dot);
-        Debug.Log(Mathf.Rad2Deg * angle);
        
         return Mathf.Rad2Deg * angle;
     }
