@@ -9,7 +9,7 @@ public class FPSGameMode : MonoBehaviour
     private List<GameObject> windows;
     private World2D world;
     private RaycastEntity targetEntity;
-    private RaycastEntity objectiveEntity;
+    private RaycastEntity objectiveEntity = new RaycastEntity();
     private RoomGenerator generator;
     private GameLoader loader;
 
@@ -35,7 +35,8 @@ public class FPSGameMode : MonoBehaviour
         {
             players[i % players.Count].SpawnPos.Add(generator.SpawnPointList[i]);
             players[i % players.Count].GetComponent<FPSPlayer>().SetPosition(generator.SpawnPointList[i]);
-        }
+        }        
+        
 
 	    //get the target and objective entities
 	    //targetEntity = generator

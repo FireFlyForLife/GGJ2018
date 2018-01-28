@@ -104,7 +104,7 @@ public class FPSPlayer : RaycastEntity
     // Use this for initialization
     void Start()
     {
-        DistIndicator.GetComponent<ObjectIndicator>().Initialize(this,DistIndicator,World);
+        DistIndicator.GetComponent<ObjectIndicator>().Initialize(this, DistIndicator, World);
         collider2D = GetComponent<Collider2D>();
         //X = Renderer.posX;
         //Y = Renderer.posY;
@@ -122,6 +122,10 @@ public class FPSPlayer : RaycastEntity
 
         TextureId = PlayerNumber;
     }
+
+
+    private PointSystem m_pointsystem = new PointSystem();
+    public PointSystem Pointsystem { get { return m_pointsystem; } }
 
     // Update is called once per frame
     void Update()
@@ -163,6 +167,7 @@ public class FPSPlayer : RaycastEntity
         }
     }
 
+
     void HandleInput()
     {
         float moveSpeed = MovementSpeed * Time.deltaTime;
@@ -175,6 +180,7 @@ public class FPSPlayer : RaycastEntity
         {
             if (World.worldMap[(int)(Y), (int)(X + dirX * moveSpeed)] <= 0) X += dirX * moveSpeed;
             if (World.worldMap[(int)(Y + dirY * moveSpeed), (int)(X)] <= 0) Y += dirY * moveSpeed;
+            Debug.Log(transform.position);
         }
         //move backwards if no wall behind you
         if (vert < 0) //down
@@ -205,6 +211,7 @@ public class FPSPlayer : RaycastEntity
             planeY = oldPlaneX * Mathf.Sin(rotSpeed) + planeY * Mathf.Cos(rotSpeed);
         }
 
+
         if (Input.GetButtonDown("Player" + PlayerNumber + "_Fire"))
         {
             lastFireTime = Time.time;
@@ -219,7 +226,7 @@ public class FPSPlayer : RaycastEntity
             RaycastHit2D[] hits = new RaycastHit2D[20];
 
 
-
+            
             Vector2 hitVector = new Vector2();
             if (GridSystem.IntersectsElement(start, dir, World, Renderer.Rect.rect.width, out hitVector) == true)
             {
@@ -235,11 +242,15 @@ public class FPSPlayer : RaycastEntity
                         if (hit.collider == collider2D)
                             continue;
 
+                        m_pointsystem.ShotPlayer();
+                        //-----------------------------------------Add Points shooting------------------------------//
                         Debug.Log("Shot someone!!!");
                         var player = hit.collider.GetComponent<FPSPlayer>();
                         if (player)
                         {
                             player.Health -= DamagePerShot;
+                            player.Health -= 100;
+                            player.Pointsystem.GotShot();
                         }
                     }
                 }
