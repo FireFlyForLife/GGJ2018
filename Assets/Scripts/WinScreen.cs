@@ -5,11 +5,10 @@ using UnityEngine;
 public class WinScreen : MonoBehaviour
 {
     [SerializeField] private GameObject[] windows;
-    private float duration;
+    [SerializeField] private float duration = 3;
 
     void OnEnable()
     {
-        duration = 3;
     }
 
     void Update()

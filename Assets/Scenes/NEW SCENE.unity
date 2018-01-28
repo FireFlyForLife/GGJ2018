@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -1337,6 +1337,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e907dfdb40f2e643844c09f053f2fe9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  keyCollectedSound: {fileID: 0}
+  keyDeliveredSound: {fileID: 0}
   Entities: []
 --- !u!4 &326289216
 Transform:
@@ -1464,7 +1466,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &374120734
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2676,6 +2678,7 @@ MonoBehaviour:
   Properties: []
   TextureId: 0
   winScreen: {fileID: 374120733}
+  MaxScore: 2
   SplashEffect: {fileID: 5913472}
   PlayerNumber: 0
   DistIndicator: {fileID: 1524982148}
@@ -3533,6 +3536,7 @@ MonoBehaviour:
   Properties: []
   TextureId: 0
   winScreen: {fileID: 1617399382}
+  MaxScore: 1
   SplashEffect: {fileID: 5913472}
   PlayerNumber: 1
   DistIndicator: {fileID: 307506687}
@@ -3812,6 +3816,7 @@ MonoBehaviour:
   - {fileID: 434882413}
   - {fileID: 833800992}
   - {fileID: 789364697}
+  clickSound: {fileID: 0}
 --- !u!1 &983849594
 GameObject:
   m_ObjectHideFlags: 0
@@ -4004,6 +4009,7 @@ MonoBehaviour:
   Properties: []
   TextureId: 0
   winScreen: {fileID: 1824745753}
+  MaxScore: 1
   SplashEffect: {fileID: 487773632}
   PlayerNumber: 3
   DistIndicator: {fileID: 97065813}
@@ -4719,7 +4725,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1403269180
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6862,6 +6868,7 @@ MonoBehaviour:
   Properties: []
   TextureId: 0
   winScreen: {fileID: 535476877}
+  MaxScore: 1
   SplashEffect: {fileID: 76653223}
   PlayerNumber: 2
   DistIndicator: {fileID: 1414168539}
