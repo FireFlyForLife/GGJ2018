@@ -151,15 +151,18 @@ public class FPSPlayer : RaycastEntity
             }
         }
 
-        if (lastUpdate + FrameUpdateDelay < Time.time)
+        if (SpriteIds.Length > 0)
         {
-            lastUpdate = Time.time;
-            if (textureIndex == SpriteIds.Length - 1)
-                textureIndex = 0;
-            else
-                ++textureIndex;
+            if (lastUpdate + FrameUpdateDelay < Time.time)
+            {
+                lastUpdate = Time.time;
+                if (textureIndex == SpriteIds.Length - 1)
+                    textureIndex = 0;
+                else
+                    ++textureIndex;
 
-            TextureId = SpriteIds[textureIndex];
+                TextureId = SpriteIds[textureIndex];
+            }
         }
     }
 

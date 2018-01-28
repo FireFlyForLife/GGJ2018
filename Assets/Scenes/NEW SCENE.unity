@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -239,7 +239,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 17534397}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ee8be3b2d5406d40a398c4c893ab6c0, type: 3}
+  m_Script: {fileID: 11500000, guid: b5f04271582932649949cd9dd01cc953, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_fillBar: {fileID: 433599243}
@@ -2211,7 +2211,7 @@ MonoBehaviour:
   IsPlayer: 0
   Properties: []
   TextureId: 0
-  SplashEffect: {fileID: 0}
+  SplashEffect: {fileID: 5913472}
   PlayerNumber: 0
   DistIndicator: {fileID: 1524982148}
   MovementSpeed: 5
@@ -2219,11 +2219,15 @@ MonoBehaviour:
   ShotRange: 10
   SplashDuration: 0.2
   DamagePerShot: 50
-  ShotSounds: []
+  ShotSounds:
+  - {fileID: 8300000, guid: 1174970463c8db64a856d7655d093cbc, type: 3}
+  - {fileID: 8300000, guid: fc79e5e612081c8418bfd440027919e0, type: 3}
+  - {fileID: 8300000, guid: b468674baec53bf48bf20aae0b0b746d, type: 3}
   HitShowTime: 0.3
   SpriteIds: 
   FrameUpdateDelay: 0.25
   textureIndex: 0
+  SplashHitObject: {fileID: 0}
   Renderer: {fileID: 182812042}
 --- !u!1 &697727034
 GameObject:
@@ -2622,7 +2626,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 841116728}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ee8be3b2d5406d40a398c4c893ab6c0, type: 3}
+  m_Script: {fileID: 11500000, guid: b5f04271582932649949cd9dd01cc953, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_fillBar: {fileID: 593616289}
@@ -2788,7 +2792,7 @@ MonoBehaviour:
   IsPlayer: 0
   Properties: []
   TextureId: 0
-  SplashEffect: {fileID: 0}
+  SplashEffect: {fileID: 5913472}
   PlayerNumber: 1
   DistIndicator: {fileID: 307506687}
   MovementSpeed: 5
@@ -2796,11 +2800,15 @@ MonoBehaviour:
   ShotRange: 10
   SplashDuration: 0.2
   DamagePerShot: 50
-  ShotSounds: []
+  ShotSounds:
+  - {fileID: 8300000, guid: 1174970463c8db64a856d7655d093cbc, type: 3}
+  - {fileID: 8300000, guid: fc79e5e612081c8418bfd440027919e0, type: 3}
+  - {fileID: 8300000, guid: b468674baec53bf48bf20aae0b0b746d, type: 3}
   HitShowTime: 0.3
   SpriteIds: 
   FrameUpdateDelay: 0.25
   textureIndex: 0
+  SplashHitObject: {fileID: 0}
   Renderer: {fileID: 1985069534}
 --- !u!1 &925776090
 GameObject:
@@ -3030,7 +3038,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 983849594}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ee8be3b2d5406d40a398c4c893ab6c0, type: 3}
+  m_Script: {fileID: 11500000, guid: b5f04271582932649949cd9dd01cc953, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_fillBar: {fileID: 175706272}
@@ -3163,7 +3171,7 @@ MonoBehaviour:
   IsPlayer: 0
   Properties: []
   TextureId: 0
-  SplashEffect: {fileID: 0}
+  SplashEffect: {fileID: 487773632}
   PlayerNumber: 3
   DistIndicator: {fileID: 97065813}
   MovementSpeed: 5
@@ -3171,11 +3179,15 @@ MonoBehaviour:
   ShotRange: 10
   SplashDuration: 0.2
   DamagePerShot: 50
-  ShotSounds: []
+  ShotSounds:
+  - {fileID: 8300000, guid: 1174970463c8db64a856d7655d093cbc, type: 3}
+  - {fileID: 8300000, guid: fc79e5e612081c8418bfd440027919e0, type: 3}
+  - {fileID: 8300000, guid: b468674baec53bf48bf20aae0b0b746d, type: 3}
   HitShowTime: 0.3
   SpriteIds: 
   FrameUpdateDelay: 0.25
   textureIndex: 0
+  SplashHitObject: {fileID: 0}
   Renderer: {fileID: 1675670498}
 --- !u!1 &1104199503
 GameObject:
@@ -3468,7 +3480,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1219800864}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ee8be3b2d5406d40a398c4c893ab6c0, type: 3}
+  m_Script: {fileID: 11500000, guid: b5f04271582932649949cd9dd01cc953, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_fillBar: {fileID: 1268179957}
@@ -5347,7 +5359,7 @@ MonoBehaviour:
   IsPlayer: 0
   Properties: []
   TextureId: 0
-  SplashEffect: {fileID: 0}
+  SplashEffect: {fileID: 76653223}
   PlayerNumber: 2
   DistIndicator: {fileID: 1414168539}
   MovementSpeed: 5
@@ -5355,11 +5367,15 @@ MonoBehaviour:
   ShotRange: 10
   SplashDuration: 0.2
   DamagePerShot: 50
-  ShotSounds: []
+  ShotSounds:
+  - {fileID: 8300000, guid: 1174970463c8db64a856d7655d093cbc, type: 3}
+  - {fileID: 8300000, guid: fc79e5e612081c8418bfd440027919e0, type: 3}
+  - {fileID: 8300000, guid: b468674baec53bf48bf20aae0b0b746d, type: 3}
   HitShowTime: 0.3
   SpriteIds: 
   FrameUpdateDelay: 0.25
   textureIndex: 0
+  SplashHitObject: {fileID: 0}
   Renderer: {fileID: 606083843}
 --- !u!1 &2124886059
 GameObject:
