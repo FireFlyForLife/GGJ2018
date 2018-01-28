@@ -1,12 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class RaycastEntity : MonoBehaviour
 {
     public bool IsPlayer = false;
 
     public List<string> Properties = new List<string>();
+
+    Vector2 dirVector = new Vector2();
+    Vector2 planeVector = new Vector2();
+
+    public int TextureId;
 
     public float X
     {
@@ -36,5 +42,4 @@ public class RaycastEntity : MonoBehaviour
         set { transform.position = value; }
     }
 
-    public int TextureId;
 }
