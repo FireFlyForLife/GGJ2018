@@ -11,15 +11,18 @@ public class FPSPlayer : RaycastEntity
     public int MaxScore = 1;
     private int m_score;
 
+    public FPSGameMode FpsGameModeInstance;
+
     public int Score
     {
         get { return m_score; }
         set
         {
-            m_score += value;
+            m_score = value;
             scoreText.text = "Score: " + m_score;
             if (m_score >= MaxScore)
             {
+                World.EndGame();
                 GameObject.FindObjectOfType<FPSGameMode>().IsOpened = false;
                 winScreen.SetActive(true);
             }
@@ -61,12 +64,17 @@ public class FPSPlayer : RaycastEntity
 
     public GameObject SplashHitObject;
     public RaycastEntity pickup;
+    public KillFeedText KillFeedText;
 
     public void Hit(int dmg, FPSPlayer player)
     {
         int v = Health - dmg;
         if (v <= 0)
+        {
             player.Score += 1;
+            KillFeedText.AddKill(player);
+        }
+
         Health = v;
     }
 
@@ -255,8 +263,8 @@ public class FPSPlayer : RaycastEntity
             planeY = oldPlaneX * Mathf.Sin(rotSpeed) + planeY * Mathf.Cos(rotSpeed);
         }
 
-
-        if (Input.GetButtonDown("Player" + PlayerNumber + "_Fire"))
+        bool canshoot = FpsGameModeInstance.IsOpened;
+        if (canshoot && Input.GetButtonDown("Player" + PlayerNumber + "_Fire"))
         {
             lastFireTime = Time.time;
             int clipnum = UnityEngine.Random.Range(0, ShotSounds.Length - 1);

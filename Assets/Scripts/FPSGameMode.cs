@@ -13,7 +13,21 @@ public class FPSGameMode : MonoBehaviour
     private RoomGenerator generator;
     private GameLoader loader;
     private bool m_isOpened;
-    public bool IsOpened { get { return m_isOpened; } set { m_isOpened = value; if (value) GetComponent<AudioSource>().Play(40000); } }
+
+    public bool IsOpened
+    {
+        get
+        {
+            return m_isOpened;
+        }
+        set
+        {
+
+
+            m_isOpened = value;
+            if (value) GetComponent<AudioSource>().Play(40000);
+        }
+    }
 
     private List<IntVector2> openDoors = new List<IntVector2>();
 
@@ -24,7 +38,6 @@ public class FPSGameMode : MonoBehaviour
 	    generator = new RoomGenerator();
 	    generator.GetGridSystem.SetGridSize(new IntVector2(50, 50));
         generator.GenerateRooms(world);
-
 
         world.worldMap = LinqConvert(generator.GetGridSystem.GetGrid);
 	    GameObject[] o =  GameObject.FindGameObjectsWithTag("Player");
@@ -37,7 +50,7 @@ public class FPSGameMode : MonoBehaviour
         {
             players[i % players.Count].SpawnPos.Add(generator.SpawnPointList[i]);
             players[i % players.Count].GetComponent<FPSPlayer>().SetPosition(generator.SpawnPointList[i]);
-        }        
+        }
         
 
 	    //get the target and objective entities

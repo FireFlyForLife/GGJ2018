@@ -7,6 +7,7 @@ public class World2D : MonoBehaviour
     [SerializeField] private AudioClip keyCollectedSound;
     //May not be used
     [SerializeField] private AudioClip keyDeliveredSound;
+    [SerializeField] private GameObject creditsGameObject;
     private AudioSource audioSource;
     public List<RaycastEntity> Entities;
     #region WorldMap
@@ -71,6 +72,18 @@ public class World2D : MonoBehaviour
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
+    }
+
+    public void EndGame()
+    {
+        audioSource.Stop();
+        StartCoroutine(DelayedCredits());
+    }
+
+    public IEnumerator DelayedCredits()
+    {
+        yield return new WaitForSeconds(6);
+        creditsGameObject.SetActive(true);
     }
 
     void Update()
