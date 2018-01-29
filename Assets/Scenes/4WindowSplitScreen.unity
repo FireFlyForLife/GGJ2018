@@ -753,7 +753,7 @@ Prefab:
     - target: {fileID: 224153791324711662, guid: c2890f85c40e8184b8f3c963d5323f89,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -60
       objectReference: {fileID: 0}
     - target: {fileID: 224464979835605874, guid: c2890f85c40e8184b8f3c963d5323f89,
         type: 2}
@@ -773,7 +773,7 @@ Prefab:
     - target: {fileID: 224464979835605874, guid: c2890f85c40e8184b8f3c963d5323f89,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -195.86
       objectReference: {fileID: 0}
     - target: {fileID: 224304312142817654, guid: c2890f85c40e8184b8f3c963d5323f89,
         type: 2}
@@ -793,7 +793,7 @@ Prefab:
     - target: {fileID: 224304312142817654, guid: c2890f85c40e8184b8f3c963d5323f89,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -331.72
       objectReference: {fileID: 0}
     - target: {fileID: 224642617972009206, guid: c2890f85c40e8184b8f3c963d5323f89,
         type: 2}
@@ -813,7 +813,7 @@ Prefab:
     - target: {fileID: 224642617972009206, guid: c2890f85c40e8184b8f3c963d5323f89,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -467.58
       objectReference: {fileID: 0}
     - target: {fileID: 224414109280087556, guid: c2890f85c40e8184b8f3c963d5323f89,
         type: 2}
@@ -833,7 +833,7 @@ Prefab:
     - target: {fileID: 224414109280087556, guid: c2890f85c40e8184b8f3c963d5323f89,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -603.44
       objectReference: {fileID: 0}
     - target: {fileID: 224357659268797848, guid: c2890f85c40e8184b8f3c963d5323f89,
         type: 2}
@@ -853,7 +853,7 @@ Prefab:
     - target: {fileID: 224357659268797848, guid: c2890f85c40e8184b8f3c963d5323f89,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -739.3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c2890f85c40e8184b8f3c963d5323f89, type: 2}
@@ -5102,7 +5102,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 0
+  m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
